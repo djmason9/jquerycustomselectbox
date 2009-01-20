@@ -26,7 +26,7 @@
 			};
 		//override defaults
 		var opts = $.extend(defaults, options);
-		$(this).find(selectboxoptions_wrap +" ul").append("<div class=\"selectboxfoot\"><div></div></div>"); //add footer
+		//$(this).find(selectboxoptions_wrap +" ul").append("<div class=\"selectboxfoot\"><div></div></div>"); //add footer
 		//set width
 		if("auto" != opts.selectwidth)
 		{
