@@ -30,12 +30,12 @@
 		//set width
 		if("auto" != opts.selectwidth)
 		{
-			//$(selectbox + " ul").css({width:opts.selectwidth});
-			//$(this).find(selectboxoptions_wrap +" ul").attr("class",opts.boxtype).css({width:(opts.selectwidth+57) + "px"});
+			$(selectbox + " ul").css({width:opts.selectwidth});
+			$(this).find(selectboxoptions_wrap +" ul").attr("class",opts.boxtype).css({width:(opts.selectwidth+57) + "px"});
 			$(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
 		}else
 		{
-			//$(this).find(selectboxoptions_wrap +" ul").attr("class",opts.boxtype).css({width:($(selectbox + " ul").width()+57) + "px"});
+			$(this).find(selectboxoptions_wrap +" ul").attr("class",opts.boxtype).css({width:($(selectbox + " ul").width()+57) + "px"});
 			$(selectboxfoot + " div").css({width:$(selectbox + " ul").width() + "px"});
 		}
 		//bind item clicks
