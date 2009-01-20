@@ -21,7 +21,7 @@
 				hoverstyle:		"hover",			//css hover style name
 				openspeed:		"normal",			//selectbox open speed "slow","normal","fast" or numbers 1000
 				isdisabled:		false,				//disables the selectbox
-				selectwidth:	"auto",				//set width of selectbox
+				selectwidth:	130,				//set width of selectbox
 				selectname:		"selectName"		//name of the selectbox input tag(s)
 			};
 		//override defaults
