@@ -42,8 +42,52 @@
 			});
 	});
 </script>
-
+<style>
+body{
+	background-color: #efefef;
+}
+a,a:LINK,a:VISITED{color:#27558e;}
+#page_wrapper{
+	border:2px dashed #999;
+	margin: auto;
+	padding:10px 30px 60px 30px ;
+	position:relative;
+	background:#fff;
+	width:800px;
+}
+.code{
+	clear:both;
+}
+label{
+	font-weight: bold;
+	clear:both;
+	display:block;
+	margin-top:25px;
+	border:1px solid #999;
+	padding:2px;
+	background:#efefef;
+}
+h2 div{
+	font-size:12px;
+	font-family: arial,helvetica,san-serif;
+	color:#999;
+}
+</style>
 	<body>
+	<div id="page_wrapper">
+	<h2>jQuery Custom Select Box
+	<div>By: Darren Mason</div>
+	<div><a href="http://plugins.jquery.com/project/customselectbox">Download Here</a></div>
+	</h2>
+	<label>BASIC USAGE</label>
+	<div class="code">
+	<code>
+	<pre>
+$("#select_1").custSelectBox();
+	</pre>
+	</code>
+	</div>
+	<p/>
 	<div class="select_wrap" id="select_1">
 			<div class="selectbox">
 				<ul>
@@ -78,6 +122,18 @@
 			</div>
 		</div>
 		
+	<label>CHECKBOX USAGE</label>
+	<div class="code">
+	<code>
+	<pre>
+$("#select_2").custSelectBox({
+	boxtype:"selectboxoptions_check",
+	selectname:"select_2"
+});
+	</pre>
+	</code>
+	</div>
+	<p/>	
 		<div class="select_wrap" id="select_2">
 			<div class="selectbox">
 				<ul>
@@ -111,7 +167,24 @@
 				</ul>
 			</div>
 		</div>
-		
+		<label>ADVANCED USAGE</label>
+		<div class="code">
+		<code>
+		<pre>
+$("#select_3").custSelectBox({
+	isscrolling:		true,
+	scrollminitems:		5,	
+	scrollheight:		100,		
+	preopenselect:		true,		
+	openspeed:		"slow",		
+	isdisabled:		false,
+	selectwidth:		150,
+	selectname:		"select_3"
+});
+			</pre>
+	</code>
+	</div>
+	<p/>
 		<div class="select_wrap" id="select_3">
 			<div class="selectbox">
 				<ul>
@@ -145,6 +218,6 @@
 				</ul>
 			</div>
 		</div>
-	
+	</div>
 	</body>
 </html>
