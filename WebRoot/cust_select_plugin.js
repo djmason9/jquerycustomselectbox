@@ -21,7 +21,7 @@
 				hoverstyle:		"hover",			//css hover style name
 				openspeed:		"normal",			//selectbox open speed "slow","normal","fast" or numbers 1000
 				isdisabled:		false,				//disables the selectbox
-				selectwidth:	130,				//set width of selectbox
+				selectwidth:	"auto",				//set width of selectbox
 				selectname:		"selectName"		//name of the selectbox input tag(s)
 			};
 		//override defaults
@@ -30,13 +30,13 @@
 		//set width
 		if("auto" != opts.selectwidth)
 		{
-			$(selectbox + " ul").css({width:opts.selectwidth});
-			$(this).find(selectboxoptions_wrap +" ul").attr("class",opts.boxtype).css({width:(opts.selectwidth+57) + "px"});
-			$(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
+			$(this).find(selectbox + " ul").css({width:opts.selectwidth});
+			$(this).find(selectboxoptions_wrap + " ul").attr("class",opts.boxtype).css({width:(opts.selectwidth+57) + "px"});
+			$(this).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
 		}else
 		{
-			$(this).find(selectboxoptions_wrap +" ul").attr("class",opts.boxtype).css({width:($(selectbox + " ul").width()+57) + "px"});
-			$(selectboxfoot + " div").css({width:$(selectbox + " ul").width() + "px"});
+			$(this).find(selectboxoptions_wrap + " ul").attr("class",opts.boxtype).css({width:($(this).find(selectbox + " ul").width()+57) + "px"});
+			$(this).find(selectboxfoot + " div").css({width:$(this).find(selectbox + " ul").width() + "px"});
 		}
 		//bind item clicks
 		$("." + opts.boxtype + " li").unbind().click( function() {
