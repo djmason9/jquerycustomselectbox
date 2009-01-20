@@ -11,11 +11,9 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 
-		<script type="text/javascript" src='jquery-1.3.js'></script>
-		<!-- custom select js -->
-		<script type="text/javascript" src='xx_custselect.js'></script>
+		<script type="text/javascript" src='http://jqueryjs.googlecode.com/files/jquery-1.3.min.js'></script>
 		<!-- custom select plugin js -->
-		<script type="text/javascript" src='cust_select_plugin.js'></script>
+		<script type="text/javascript" src='http://jquerycustomselectbox.googlecode.com/svn/trunk/WebRoot/cust_select_plugin.js'></script>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<!--[if IE]>
 			<link rel="stylesheet" type="text/css" href="ie_style.css" >
