@@ -28,7 +28,7 @@
 		var opts = $.extend(defaults, options);
 		$(this).find(selectboxoptions_wrap +" ul").append("<div class=\"selectboxfoot\"><div></div></div>"); //add footer
 		//set width
-		if(opts.selectwidth === "auto")
+		if(opts.selectwidth === 'auto')
 		{
 			$(this).find(selectboxoptions_wrap +" ul").attr("class",opts.boxtype).css({width:($(selectbox + " ul").width()+57) + "px"});
 			$(selectboxfoot + " div").css({width:$(selectbox + " ul").width() + "px"});
