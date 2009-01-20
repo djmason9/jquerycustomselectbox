@@ -1,3 +1,38 @@
+/**
+ * cust_select_plugin.js
+ * Copyright (c) 2009 myPocket technologies (www.mypocket-technologies.com)
+ 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ * @author Darren Mason
+ * @projectDescription	Replaces the standard HTML form selectbox with a custom looking selectbox. Allows for disable, multiselect, scrolling, and very customizable.
+ * @version 1.0.0
+ * 
+ * @requires jquery.js (tested with 1.3.0)
+ * 
+ * @param boxtype: 			defaultboxtype,		//box type selectboxoptions_radio or selectboxoptions_check
+ * @param isscrolling: 		false,				//scrolls long lists
+ * @param scrollminitems:	15,					//items before scrolling
+ * @param scrollheight:		150,				//height of scrolling window
+ * @param preopenselect:	true,				//opens prechecked select boxes
+ * @param hoverstyle:		"hover",			//css hover style name
+ * @param openspeed:		"normal",			//selectbox open speed "slow","normal","fast" or numbers 1000
+ * @param isdisabled:		false,				//disables the selectbox
+ * @param selectwidth:		"auto",				//set width of selectbox
+ * @param selectname:		"selectName" 
+ */
+
 (function($) {
 
 	$.fn.custSelectBox = function(options){
