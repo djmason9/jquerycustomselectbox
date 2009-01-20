@@ -43,7 +43,8 @@
 		var hideitem = "hideitem";
 		var classselected = "selected";
 		var classselectboxopen = "selectboxopen";
-		var selectboxfoot = ".selectboxfoot";
+		var classselectboxfoot ="selectboxfoot";
+		var selectboxfoot = "." +classselectboxfoot;
 		var elmValue = ".elmValue";
 		
 		var defaults = {
@@ -60,7 +61,7 @@
 			};
 		//override defaults
 		var opts = $.extend(defaults, options);
-		$(this).find(selectboxoptions_wrap +" ul").after("<div class=\"selectboxfoot\"><div></div></div>"); //add footer
+		$(this).find(selectboxoptions_wrap +" ul").after("<div class=\""+selectboxfoot+"\"><div></div></div>"); //add footer
 		//set width
 		if("auto" != opts.selectwidth)
 		{
