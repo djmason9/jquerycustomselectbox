@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SandBoxProject"
+  id="myeclipse.1232142487268"
+  context-root="/SandBoxProject"
+  j2ee-spec="5.0"
+  archive="SandBoxProject.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
