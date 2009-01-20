@@ -22,15 +22,15 @@
 	$(document).ready( function() {
 		 
 		//BASIC USE
-		$(".select_wrap_1").custSelectBox({selectname:"select_1"});
+		$("#select_1").custSelectBox({selectname:"select_1"});
 		
 		//CHECKBOX USE
-		$(".select_wrap_2").custSelectBox({
+		$("#select_2").custSelectBox({
 			boxtype:"selectboxoptions_check",
 			selectname:"select_2"
 			});
 		//ADVANCED USE 
-		$(".select_wrap_3").custSelectBox({
+		$("#select_3").custSelectBox({
 			isscrolling: 	true,				//scrolls long lists
 			scrollminitems:	5,					//items before scrolling
 			scrollheight:	100,				//height of scrolling window
@@ -44,7 +44,7 @@
 </script>
 
 	<body>
-	<div class="select_wrap_1">
+	<div class="select_wrap" id="select_1">
 			<div class="selectbox">
 				<ul>
 					<li>
@@ -78,7 +78,7 @@
 			</div>
 		</div>
 		
-		<div class="select_wrap_2">
+		<div class="select_wrap" id="select_2">
 			<div class="selectbox">
 				<ul>
 					<li>
@@ -112,7 +112,7 @@
 			</div>
 		</div>
 		
-		<div class="select_wrap_3">
+		<div class="select_wrap" id="select_3">
 			<div class="selectbox">
 				<ul>
 					<li>
