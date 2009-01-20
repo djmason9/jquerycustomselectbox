@@ -20,7 +20,7 @@
  * 
  * @requires jquery.js (tested with 1.3.0)
  * 
- * @param boxtype: 			defaultboxtype,		//box type selectboxoptions_radio or selectboxoptions_check
+ * @param boxtype: 			defaultboxtype,		//boxtype selectboxoptions_radio or selectboxoptions_check
  * @param isscrolling: 		false,				//scrolls long lists
  * @param scrollminitems:	15,					//items before scrolling
  * @param scrollheight:		150,				//height of scrolling window
