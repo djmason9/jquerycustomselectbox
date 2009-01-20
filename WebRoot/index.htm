@@ -22,11 +22,12 @@
 	$(document).ready( function() {
 		 
 		//BASIC USE
-		$(".select_wrap_1").custSelectBox();
+		$(".select_wrap_1").custSelectBox({selectname:"select_1"});
 		
 		//CHECKBOX USE
 		$(".select_wrap_2").custSelectBox({
-			boxtype:"selectboxoptions_check"
+			boxtype:"selectboxoptions_check",
+			selectname:"select_2"
 			});
 		//ADVANCED USE 
 		$(".select_wrap_3").custSelectBox({
@@ -36,7 +37,8 @@
 			preopenselect:	true,				//opens prechecked select boxes
 			openspeed:		"slow",			//selectbox open speed "slow","normal","fast" or numbers 1000
 			isdisabled:		false,
-			selectwidth:	150
+			selectwidth:	150,
+			selectname:"select_3"
 			});
 	});
 </script>
