@@ -1,6 +1,6 @@
 /************* CUSTOM TAG FOR SELECT *************************/
 .setScroll{
-	overflow-y:scroll !important;
+	overflow-y:scroll;
 }
 .hideitem,.elmValue{
 	display: none;
