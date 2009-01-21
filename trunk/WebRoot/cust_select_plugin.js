@@ -16,7 +16,7 @@
 
  * @author Darren Mason
  * @projectDescription	Replaces the standard HTML form selectbox with a custom looking selectbox. Allows for disable, multiselect, scrolling, and very customizable.
- * @version 1.0.2
+ * @version 1.0.3
  * 
  * @requires jquery.js (tested with 1.3.0)
  * 
@@ -29,7 +29,6 @@
  * @param openspeed:		"normal",			//selectbox open speed "slow","normal","fast" or numbers 1000
  * @param isdisabled:		false,				//disables the selectbox
  * @param selectwidth:		"auto",				//set width of selectbox
- * @param selectname:		"selectName" 
  */
 
 (function($) {
@@ -56,9 +55,9 @@
 				hoverstyle:		"hover",			//css hover style name
 				openspeed:		"normal",			//selectbox open speed "slow","normal","fast" or numbers 1000
 				isdisabled:		false,				//disables the selectbox
-				selectwidth:	"auto",				//set width of selectbox
-				selectname:		"selectName"		//name of the selectbox input tag(s)
+				selectwidth:	"auto"				//set width of selectbox
 			};
+		var name = $(this).attr("id");
 		//override defaults
 		var opts = $.extend(defaults, options);
 		$(this).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
@@ -172,13 +171,13 @@
 				
 				if(opts.boxtype == defaultboxtype)
 				{
-					$(thisElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+opts.selectname+"\" name=\""+opts.selectname+"\" value=\"\">");
+					$(thisElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+name+"\" name=\""+name+"\" value=\"\">");
 				}
 				else
 				{
 					for(var i=0;i<$(thisElm).find(selectboxoptions_wrap + " li").length;i++)
 					{
-						$($(thisElm).find(selectboxoptions_wrap + " li").get(i)).append("<input type=\"hidden\" id=\""+opts.selectname +"_"+ i+"\" name=\""+opts.selectname +"_"+ i+"\" value=\"\">");
+						$($(thisElm).find(selectboxoptions_wrap + " li").get(i)).append("<input type=\"hidden\" id=\""+name +"_"+ i+"\" name=\""+name +"_"+ i+"\" value=\"\">");
 						
 						if($($(thisElm).find(selectboxoptions_wrap + " li").get(i)).hasClass(classselected))
 						{
@@ -187,7 +186,7 @@
 						}
 					}
 				}
-			}
+			};
 			
 			//opens selectboxs if they have pre selected options
 			$.fn.openSelectBoxsThatArePrePopulated = function()
