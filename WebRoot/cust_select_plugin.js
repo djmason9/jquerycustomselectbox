@@ -57,20 +57,25 @@
 				isdisabled:		false,				//disables the selectbox
 				selectwidth:	"auto"				//set width of selectbox
 			};
-		var name = $(this).attr("id");
 		//override defaults
 		var opts = $.extend(defaults, options);
 		$(this).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
 		//set width
-		if("auto" != opts.selectwidth)
+		
+		for(var x=0;x<$(this).length;x++)
 		{
-			$(this).find(selectbox + " ul").css({width:opts.selectwidth});
-			$(this).find(selectboxoptions_wrap + " ul").attr("class",opts.boxtype).css({width:(opts.selectwidth+57) + "px"});
-			$(this).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
-		}else
-		{
-			$(this).find(selectboxoptions_wrap + " ul").attr("class",opts.boxtype).css({width:($(this).find(selectbox + " ul").width()+57) + "px"});
-			$(this).find(selectboxfoot + " div").css({width:$(this).find(selectbox + " ul").width() + "px"});
+			var currElm = $(this).get(x);
+			
+			if("auto" != opts.selectwidth)
+			{
+				$(currElm).find(selectbox + " ul").css({width:opts.selectwidth});
+				$(currElm).find(selectboxoptions_wrap + " ul").attr("class",opts.boxtype).css({width:(opts.selectwidth+57) + "px"});
+				$(currElm).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
+			}else
+			{
+				$(currElm).find(selectboxoptions_wrap + " ul").attr("class",opts.boxtype).css({width:($(currElm).find(selectbox + " ul").width()+57) + "px"});
+				$(currElm).find(selectboxfoot + " div").css({width:$(currElm).find(selectbox + " ul").width() + "px"});
+			}
 		}
 		//bind item clicks
 		$("." + opts.boxtype + " li").unbind().click( function() {
@@ -165,24 +170,28 @@
 					$($(thisElm).find("." +opts.boxtype).get(i)).find("input").attr("disabled","disabled");
 				}				
 			};
-			
+		
 			//adds form elements to the selectbox
 			$.fn.addformelms = function(thisElm){
 				
-				if(opts.boxtype == defaultboxtype)
+				for(var x=0;x<$(thisElm).length;x++)
 				{
-					$(thisElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+name+"\" name=\""+name+"\" value=\"\">");
-				}
-				else
-				{
-					for(var i=0;i<$(thisElm).find(selectboxoptions_wrap + " li").length;i++)
+					var currElm = $(thisElm).get(x); 
+					if(opts.boxtype == defaultboxtype)
 					{
-						$($(thisElm).find(selectboxoptions_wrap + " li").get(i)).append("<input type=\"hidden\" id=\""+name +"_"+ i+"\" name=\""+name +"_"+ i+"\" value=\"\">");
-						
-						if($($(thisElm).find(selectboxoptions_wrap + " li").get(i)).hasClass(classselected))
+						$(currElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+$(currElm).attr("id")+"\" name=\""+$(currElm).attr("id")+"\" value=\"\">");
+					}
+					else
+					{
+						for(var i=0;i<$(currElm).find(selectboxoptions_wrap + " li").length;i++)
 						{
-							var elmVal = $($(thisElm).find(selectboxoptions_wrap + " li").get(i)).find(elmValue).text();
-							$($(thisElm).find(selectboxoptions_wrap + " li").get(i)).find("input").val(elmVal);
+							$($(currElm).find(selectboxoptions_wrap + " li").get(i)).append("<input type=\"hidden\" id=\""+$(currElm).attr("id") +"_"+ i+"\" name=\""+$(currElm).attr("id") +"_"+ i+"\" value=\""+$(currElm).attr("id")+"\">");
+							
+							if($($(currElm).find(selectboxoptions_wrap + " li").get(i)).hasClass(classselected))
+							{
+								var elmVal = $($(currElm).find(selectboxoptions_wrap + " li").get(i)).find(elmValue).text();
+								$($(currElm).find(selectboxoptions_wrap + " li").get(i)).find("input").val(elmVal);
+							}
 						}
 					}
 				}
@@ -202,7 +211,7 @@
 				}
 			};
 			
-			$.fn.addformelms();
+			$.fn.addformelms($(this));
 			if(opts.preopenselect){ $.fn.openSelectBoxsThatArePrePopulated();}
 			if(opts.isdisabled){$.fn.disable($(this));}
 	};
