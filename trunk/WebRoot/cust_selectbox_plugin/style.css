@@ -3,7 +3,7 @@
 	overflow-y:scroll;
 }
 .hideitem,.elmValue{
-	display: none;
+	display: none; 
 }
 .selectbox{
 	background: url("images/dropdown.png") no-repeat 0 0;
