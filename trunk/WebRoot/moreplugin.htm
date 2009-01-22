@@ -11,7 +11,7 @@
 <title>Plug-in</title>
 <script>
 $(document).ready( function() {
-	$(".custBox").custCheckBox();
+	$("input").custCheckBox();
 });
 </script>
 <style>
@@ -20,22 +20,33 @@ $(document).ready( function() {
 	cursor: pointer;
 }
 .cust_checkbox_off{
-	background:url(images/checkbox_off.png) no-repeat 0 0;
+	background:url(checkbox_images/checkbox_off.png) no-repeat 0 0;
 }
 .cust_checkbox_on{
-	background:url(images/checkbox_on.png) no-repeat 0 0;
+	background:url(checkbox_images/checkbox_on.png) no-repeat 0 0;
 }
 .cust_checkbox_disable{
-	background:url(images/checkbox_disable.png) no-repeat 0 0;
+	background:url(checkbox_images/checkbox_disable.png) no-repeat 0 0;
 }
 </style>
 </head>
 <body>
 <div id="page_wrapper">
-Custom forms: 
-
-<input type="checkbox" value="1" name="" id="" checked="checked" class="custBox"/>
-<input type="radio" value="2" name="" id="" class="custBox"/>
+Check Box Items: 
+<br/>
+<span class="checkbox_group">
+<input type="checkbox" value="1x" name="checkboxone" id="" checked="checked"/>
+<input type="checkbox" value="1x" name="checkboxone" id=""/>
+<input type="checkbox" value="1x" name="checkboxone" id="" checked="checked"/>
+</span>
+<p/>
+Radio Button Items:
+<br/>
+<span class="radio_group">
+<input type="radio" value="2x" name="radioone" id=""/>
+<input type="radio" value="2x" name="radioone" id="" checked="checked"/>
+<input type="radio" value="2x" name="radioone" id=""/>
+<span>
 </div>
 </body>
 </html>
