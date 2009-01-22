@@ -25,35 +25,56 @@
 
 (function($) {	
 	$.fn.custCheckBox = function(options){
-		var preCSS = "cust_checkbox_";
+		var cssoff = "cust_checkbox_off";
+		var csson ="cust_checkbox_on";
 		
-		var defaults = {
-				elmType: 			"checkbox",
-				defaultAllstate: 	"off"
+		$.fn.buildbox = function(thisElm){
+
+			for(var x=0;x<$(thisElm).length;x++)
+			{
+				var currElm = $(thisElm).get(x);
+				
+				$(currElm).css({display:"none"}).after("<span class=\"cust_checkbox\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+				
+				var isChecked = $(currElm).attr("checked");
+				
+				var boxtype = $(currElm).attr("type");
+				
+				if(boxtype === "checkbox"){
+					$(currElm).next("span").addClass("checkbox");
+				}
+				else{
+					$(currElm).next("span").addClass("radio");
+				}
+				
+				if(isChecked){
+					$(currElm).next("span").addClass(csson);
+				}
+				else{
+					$(currElm).next("span").addClass(cssoff);
+				}
+			}
 		};
 		
-		var opts = $.extend(defaults, options);
-		
-		$(this).css({display:"none"}).wrap("<span class=\"cust_checkbox "+preCSS+opts.defaultAllstate+"\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
-		
-		console.log($(this).html());
-		
-		var isChecked = $(this).attr("checked");
-
-		if(isChecked){
-			$(this).find(".cust_checkbox").addClass(preCSS + "on");
-		}
-		
+		$.fn.buildbox($(this));
 		
 		$(".cust_checkbox").unbind().click(function(){
 			
-			if($(this).hasClass(preCSS + "off"))
+			if($(this).hasClass("checkbox"))
 			{
-				$(this).removeClass(preCSS + "off").addClass(preCSS + "on");
+				if($(this).hasClass(cssoff))
+				{
+					$(this).removeClass(cssoff).addClass(csson); //turn on
+				}
+				else
+				{
+					$(this).removeClass(csson).addClass(cssoff); //turn off
+				}
 			}
 			else
 			{
-				$(this).removeClass(preCSS + "on").addClass(preCSS + "off");
+				$(this).parent().find(".cust_checkbox").removeClass(csson).addClass(cssoff);
+				$(this).removeClass(cssoff).addClass(csson); //turn on
 			}
 			
 		});
