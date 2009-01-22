@@ -38,7 +38,7 @@
 			{
 				var currElm = $(thisElm).get(x);
 				
-				$(currElm).css({display:"none"}).after("<span class=\"cust_checkbox\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+				$(currElm).css({display:"none"}).before("<span class=\"cust_checkbox\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
 				
 				var isChecked = $(currElm).attr("checked");
 				var boxtype = $(currElm).attr("type");
@@ -46,21 +46,21 @@
 				
 				if(boxtype === "checkbox")
 				{
-					$(currElm).next("span").addClass("checkbox");
+					$(currElm).prev("span").addClass("checkbox");
 					if(disabled || opts.disable_all)
 						boxtype = "checkbox_disabled";
 				}
 				else
 				{
-					$(currElm).next("span").addClass("radio");
+					$(currElm).prev("span").addClass("radio");
 					if(disabled || opts.disable_all)
 						boxtype = "radio_disabled";
 				}
 				
 				if(isChecked)
-					$(currElm).next("span").addClass("cust_"+boxtype+"_on");
+					$(currElm).prev("span").addClass("cust_"+boxtype+"_on");
 				else
-					$(currElm).next("span").addClass("cust_"+boxtype+"_off");
+					$(currElm).prev("span").addClass("cust_"+boxtype+"_off");
 				
 				if(opts.disable_all)
 					$(currElm).attr("disabled","disabled");
@@ -69,24 +69,48 @@
 		
 		$.fn.buildbox($(this));
 		
+		$(".group label").unbind().click(function(){
+			
+			if(!opts.disable_all)
+			{
+				var custbox = $(this).next("span");
+				var boxtype = $(custbox).next("input").attr("type");
+				var disabled = $(custbox).next("input").attr("disabled");
+					
+				if($(custbox).hasClass("checkbox"))
+				{
+					if($(custbox).hasClass("cust_"+boxtype+"_off") && !disabled)
+						$(custbox).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on"); //turn on
+					else if(!disabled)
+						$(custbox).removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off"); //turn off
+				}
+				else if(!disabled)
+				{
+					$(custbox).parent().find(".cust_checkbox").removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").removeAttr("checked");
+					$(custbox).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on"); //turn on
+				}
+			}
+			
+		});
+		
 		$(".cust_checkbox").unbind().click(function(){
 			
 			if(!opts.disable_all)
 			{
-				var boxtype = $(this).prev("input").attr("type");
-				var disabled = $(this).prev("input").attr("disabled");
+				var boxtype = $(this).next("input").attr("type");
+				var disabled = $(this).next("input").attr("disabled");
 					
 				if($(this).hasClass("checkbox"))
 				{
 					if($(this).hasClass("cust_"+boxtype+"_off") && !disabled)
-						$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").prev("input").attr("checked","checked"); //turn on
+						$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").next("input").attr("checked","checked"); //turn on
 					else if(!disabled)
-						$(this).removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").prev("input").removeAttr("checked"); //turn off
+						$(this).removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").removeAttr("checked"); //turn off
 				}
 				else if(!disabled)
 				{
-					$(this).parent().find(".cust_checkbox").removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").prev("input").removeAttr("checked");
-					$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").prev("input").attr("checked","checked"); //turn on
+					$(this).parent().find(".cust_checkbox").removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").removeAttr("checked");
+					$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").next("input").attr("checked","checked"); //turn on
 				}
 			}
 			

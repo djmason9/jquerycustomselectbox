@@ -13,7 +13,7 @@ a,a:LINK,a:VISITED{color:#27558e;}
 .code{
 	clear:both;
 }
-label{
+label.lbl_header{
 	font-weight: bold;
 	clear:both;
 	display:block;

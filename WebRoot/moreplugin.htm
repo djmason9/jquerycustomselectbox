@@ -22,23 +22,27 @@ $(document).ready( function() {
 	<div>By: Darren Mason</div>
 	<div><a href="#">Download Here</a></div>
 	</h2>
-	<label>HTML EXAMPLE</label>
+	<label class="lbl_header">HTML EXAMPLE</label>
 	<pre class="html">
 &#60;span class="group"&#62;
-	Label One: &#60;input type="checkbox" value="1x" name="checkboxone" id="" checked="checked"/&#62;
-	Label Two: &#60;input type="checkbox" value="1x" name="checkboxone" id=""/&#62;
-	Label Three: &#60;input type="checkbox" value="1x" name="checkboxone" id="" checked="checked"/&#62;
+	&#60;label for="1x"&#62;Label One:&#60;/label&#62; 
+	&#60;input type="checkbox" value="1x" name="checkboxone" id="1x" checked="checked"/&#62;
+	&#60;label for="2x"&#62;Label Two:&#60;/label&#62; 
+	&#60;input type="checkbox" value="1x" name="checkboxone" id="2x"/&#62;
+	&#60;label for="3x"&#62;Label Three:&#60;/label&#62; 
+	&#60;input type="checkbox" value="1x" name="checkboxone" id="3x" checked="checked"/&#62;
 &#60;/span&#62;
-
-<dfn>OR</dfn>
-
+<center><dfn> -- OR --</dfn></center>
 &#60;span class="group"&#62;
-	Label One: &#60;input type="radio" value="1x" name="checkboxone" id=""/&#62;
-	Label Two: &#60;input type="radio" value="1x" name="checkboxone" id="" checked="checked"/&#62;
-	Label Three: &#60;input type="radio" value="1x" name="checkboxone" id=""/&#62;
+	&#60;label for="4x"&#62;Label One:&#60;/label&#62; 
+	&#60;input type="radio" value="1x" name="checkboxone" id="4x"/&#62;
+	&#60;label for="5x"&#62;Label Two:&#60;/label&#62; 
+	&#60;input type="radio" value="1x" name="checkboxone" id="5x" checked="checked"/&#62;
+	&#60;label for="6x"&#62;Label Three:&#60;/label&#62; 
+	&#60;input type="radio" value="1x" name="checkboxone" id="6x"/&#62;
 &#60;/span&#62;
 	</pre>
-<label>BASIC USAGE</label>
+<label class="lbl_header">BASIC USAGE</label>
 <div class="code">
 	<code>
 	<pre>
@@ -50,17 +54,17 @@ $("input").custCheckBox();
 Check Box Items: 
 <br/>
 <span class="group">
-	Label One: <input type="checkbox" value="1x" name="checkboxone" id="" checked="checked"/>
-	Label Two: <input type="checkbox" value="1x" name="checkboxone" id=""/>
-	Label Three: <input type="checkbox" value="1x" name="checkboxone" id="" checked="checked"/>
+	<label for="1x">Label One:</label> <input type="checkbox" value="1x" name="checkboxone" id="1x" checked="checked"/>
+	<label for="2x">Label Two:</label> <input type="checkbox" value="1x" name="checkboxone" id="2x"/>
+	<label for="3x">Label Three:</label> <input type="checkbox" value="1x" name="checkboxone" id="3x" checked="checked"/>
 </span>
 <p/>
 Radio Button Items:
 <br/>
 <span class="group">
-	Label One: <input type="radio" value="2x" name="radioone" id=""/>
-	Label Two: <input type="radio" value="2x" name="radioone" id="" checked="checked"/>
-	Label Three: <input type="radio" value="2x" name="radioone" id=""/>
+	<label for="4x">Label One:</label> <input type="radio" value="4x" name="radioone" id="4x"/>
+	<label for="5x">Label Two:</label> <input type="radio" value="5x" name="radioone" id="5x" checked="checked"/>
+	<label for="6x">Label Three:</label> <input type="radio" value="6x" name="radioone" id="6x"/>
 <span>
 </div>
 </body>
