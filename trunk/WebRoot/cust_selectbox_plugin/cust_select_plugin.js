@@ -45,6 +45,7 @@
 		var classselectboxfoot ="selectboxfoot";
 		var selectboxfoot = "." +classselectboxfoot;
 		var elmValue = ".elmValue";
+		var thisElement = $(this);
 		
 		var defaults = {
 				boxtype: 		defaultboxtype,		//box type selectboxoptions_radio or selectboxoptions_check
@@ -59,12 +60,12 @@
 			};
 		//override defaults
 		var opts = $.extend(defaults, options);
-		$(this).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
+		$(thisElement).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
 		//set width
 		
-		for(var x=0;x<$(this).length;x++)
+		for(var x=0;x<$(thisElement).length;x++)
 		{
-			var currElm = $(this).get(x);
+			var currElm = $(thisElement).get(x);
 			
 			if("auto" != opts.selectwidth)
 			{
@@ -120,7 +121,7 @@
 		});
 
 		//bind sliding open
-		$(this).find(selectbox).unbind().toggle(
+		$(thisElement).find(selectbox).unbind().toggle(
 				function() {
 					if(opts.isscrolling){$.fn.scrolling($(this),true);}
 					//unhide li
@@ -211,9 +212,9 @@
 				}
 			};
 			
-			$.fn.addformelms($(this));
+			$.fn.addformelms($(thisElement));
 			if(opts.preopenselect){ $.fn.openSelectBoxsThatArePrePopulated();}
-			if(opts.isdisabled){$.fn.disable($(this));}
+			if(opts.isdisabled){$.fn.disable($(thisElement));}
 	};
 	
 })(jQuery);
