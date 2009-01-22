@@ -27,5 +27,11 @@
 	background:url(checkbox_images/disabled_off.png) no-repeat 0 0;
 }
 .group{
-	color:#999;
+	color:#333;
+}
+fieldset{
+		border:1px solid #ccc;	
+}
+fieldset label{
+	color:#999;	
 }
