@@ -16,17 +16,21 @@
 
  * @author Darren Mason
  * @projectDescription	Replaces the standard HTML form checkbox or radio buttons. Allows for disable, multi select, and very customizable.
- * @version 1.0.2
+ * @version 1.0.0
  * 
- * @requires jquery.js (tested with 1.3.0)
+ * @requires jquery.js (tested with 1.3.1)
  * 
- * @param elmType: 			defaultElmType
+ * @param disable_all:	false
  */
 
 (function($) {	
 	$.fn.custCheckBox = function(options){
-		var cssoff = "cust_checkbox_off";
-		var csson ="cust_checkbox_on";
+		
+		var defaults = {
+				disable_all:	false				//disables all the elements
+			};
+		//override defaults
+		var opts = $.extend(defaults, options);
 		
 		$.fn.buildbox = function(thisElm){
 
@@ -37,22 +41,29 @@
 				$(currElm).css({display:"none"}).after("<span class=\"cust_checkbox\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
 				
 				var isChecked = $(currElm).attr("checked");
-				
 				var boxtype = $(currElm).attr("type");
+				var disabled = $(currElm).attr("disabled");
 				
-				if(boxtype === "checkbox"){
+				if(boxtype === "checkbox")
+				{
 					$(currElm).next("span").addClass("checkbox");
+					if(disabled || opts.disable_all)
+						boxtype = "checkbox_disabled";
 				}
-				else{
+				else
+				{
 					$(currElm).next("span").addClass("radio");
+					if(disabled || opts.disable_all)
+						boxtype = "radio_disabled";
 				}
 				
-				if(isChecked){
-					$(currElm).next("span").addClass(csson);
-				}
-				else{
-					$(currElm).next("span").addClass(cssoff);
-				}
+				if(isChecked)
+					$(currElm).next("span").addClass("cust_"+boxtype+"_on");
+				else
+					$(currElm).next("span").addClass("cust_"+boxtype+"_off");
+				
+				if(opts.disable_all)
+					$(currElm).attr("disabled","disabled");
 			}
 		};
 		
@@ -60,21 +71,23 @@
 		
 		$(".cust_checkbox").unbind().click(function(){
 			
-			if($(this).hasClass("checkbox"))
+			if(!opts.disable_all)
 			{
-				if($(this).hasClass(cssoff))
+				var boxtype = $(this).prev("input").attr("type");
+				var disabled = $(this).prev("input").attr("disabled");
+					
+				if($(this).hasClass("checkbox"))
 				{
-					$(this).removeClass(cssoff).addClass(csson); //turn on
+					if($(this).hasClass("cust_"+boxtype+"_off") && !disabled)
+						$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").prev("input").attr("checked","checked"); //turn on
+					else if(!disabled)
+						$(this).removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").prev("input").removeAttr("checked"); //turn off
 				}
-				else
+				else if(!disabled)
 				{
-					$(this).removeClass(csson).addClass(cssoff); //turn off
+					$(this).parent().find(".cust_checkbox").removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").prev("input").removeAttr("checked");
+					$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").prev("input").attr("checked","checked"); //turn on
 				}
-			}
-			else
-			{
-				$(this).parent().find(".cust_checkbox").removeClass(csson).addClass(cssoff);
-				$(this).removeClass(cssoff).addClass(csson); //turn on
 			}
 			
 		});
