@@ -12,7 +12,7 @@
 <title>Plug-in</title>
 <script>
 $(document).ready( function() {
-	$("input").custCheckBox();
+	$("input[type='radio'],input[type='checkbox']").custCheckBox();
 });
 </script>
 </head>
@@ -24,6 +24,8 @@ $(document).ready( function() {
 	</h2>
 	<label class="lbl_header">HTML EXAMPLE</label>
 	<pre class="html">
+<dfn>Requires a wrapper tag with the class "group". Could be any HTML tag. (div, span, fieldset, etc.)</dfn>
+
 &#60;span class="group"&#62;
 	&#60;label for="1x"&#62;Label One:&#60;/label&#62; 
 	&#60;input type="checkbox" value="1x" name="checkboxone" id="1x" checked="checked"/&#62;
@@ -47,25 +49,32 @@ $(document).ready( function() {
 	<code>
 	<pre>
 <span  class="html">Applies to all boxes</span>
-$("input").custCheckBox();
+$("input[type='checkbox']").custCheckBox();
 	</pre>
 	</code>
-	</div>
-Check Box Items: 
-<br/>
-<span class="group">
-	<label for="1x">Label One:</label> <input type="checkbox" value="1x" name="checkboxone" id="1x" checked="checked"/>
-	<label for="2x">Label Two:</label> <input type="checkbox" value="1x" name="checkboxone" id="2x"/>
-	<label for="3x">Label Three:</label> <input type="checkbox" value="1x" name="checkboxone" id="3x" checked="checked"/>
-</span>
-<p/>
-Radio Button Items:
-<br/>
-<span class="group">
-	<label for="4x">Label One:</label> <input type="radio" value="4x" name="radioone" id="4x"/>
-	<label for="5x">Label Two:</label> <input type="radio" value="5x" name="radioone" id="5x" checked="checked"/>
-	<label for="6x">Label Three:</label> <input type="radio" value="6x" name="radioone" id="6x"/>
-<span>
+</div>
+	<fieldset class="group">
+	<legend>Check Box Items:</legend>
+		<label for="1x">Label One:</label> <input type="checkbox" value="1x" name="checkboxone" id="1x" checked="checked"/>
+		<label for="2x">Label Two:</label> <input type="checkbox" value="1x" name="checkboxone" id="2x"/>
+		<label for="3x">Label Three:</label> <input type="checkbox" value="1x" name="checkboxone" id="3x" checked="checked"/>
+	</fieldset>
+	<p/>
+<div class="code">
+	<code>
+	<pre>
+<span class="html">Applies to all boxes</span>
+$("input[type='radio']").custCheckBox();
+	</pre>
+	</code>
+</div>
+	<fieldset class="group">
+	<legend>Radio Button Items:</legend>
+		<label for="4x">Label One:</label> <input type="radio" value="4x" name="radioone" id="4x"/>
+		<label for="5x">Label Two:</label> <input type="radio" value="5x" name="radioone" id="5x" checked="checked"/>
+		<label for="6x">Label Three:</label> <input type="radio" value="6x" name="radioone" id="6x"/>
+	</fieldset>
+	
 </div>
 </body>
 </html>
