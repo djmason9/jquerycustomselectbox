@@ -16,18 +16,20 @@
 
  * @author Darren Mason
  * @projectDescription	Replaces the standard HTML form checkbox or radio buttons. Allows for disable, and very customizable.
- * @version 1.0.0
+ * @version 1.0.1
  * 
  * @requires jquery.js (tested with 1.3.1)
  * 
- * @param disable_all:	false
+ * @param disable_all:	false,
+ * @param wrapperclass:	"group"
  */
 
 (function($) {	
 	$.fn.custCheckBox = function(options){
 		
 		var defaults = {
-				disable_all:	false				//disables all the elements
+				disable_all:	false,				//disables all the elements
+				wrapperclass:	"group"
 			};
 		//override defaults
 		var opts = $.extend(defaults, options);
@@ -69,7 +71,7 @@
 		
 		$.fn.buildbox($(this));
 		
-		$(".group label").unbind().click(function(){
+		$("."+ opts.wrapperclass+" label").unbind().click(function(){
 			
 			if(!opts.disable_all)
 			{
