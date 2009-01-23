@@ -1,0 +1,48 @@
+input{
+	height:28px;
+	width:200px;
+	border:1px solid #ccc;
+	font-size:16px;
+	font-weight: bold;
+	color:#666;
+	padding:7px 0 0 4px;
+}
+
+
+/* 	RESULT STYLE  */
+.testresult{
+	font-weight: bold;
+	font-size:13px;
+	font-family: arail,helvetica,san-serif;
+	color:#666;
+	padding:10px 0px 12px 10px;
+	margin:0 10px 0 10px;
+}
+.testresult span{
+	padding:10px 20px 12px 10px;
+	margin: 10px 0px 10px 20px;
+}
+.shortPass{
+	background:url(images/red.png) no-repeat 0 0;
+}
+.shortPass span{
+	background:url(images/red.png) no-repeat top right;
+}
+.badPass{
+	background:url(images/red.png) no-repeat 0 0;
+}
+.badPass span{
+	background:url(images/red.png) no-repeat top right;
+}
+.goodPass{
+	background:url(images/yellow.png) no-repeat 0 0;
+}
+.goodPass span{
+	background:url(images/yellow.png) no-repeat top right;
+}
+.strongPass{
+	background:url(images/green.png) no-repeat 0 0;
+}
+.strongPass span{
+	background:url(images/green.png) no-repeat top right;
+}
