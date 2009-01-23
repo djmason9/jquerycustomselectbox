@@ -79,20 +79,24 @@
 			{
 				var currElm = $(thisElm).get(x); 
 				var boxtype = $($(thisElement).get(x)).find(selectboxoptions_wrap+ " ul").attr("class");
-				if(boxtype == "selectboxoptions_radio")
+				
+				if(boxtype.indexOf("selectboxoptions_radio") >-1)
 				{
-					$(currElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+$(currElm).attr("id")+"\" name=\""+$(currElm).attr("id")+"\" value=\"\">");
+					var radioVal = $(currElm).find("."+classselected+" span").text();
+					$(currElm).find(selectboxoptions_wrap).append("<input type=\"text\" id=\""+$(currElm).attr("id")+"\" name=\""+$(currElm).attr("id")+"\" value=\""+radioVal+"\">");
 				}
 				else
 				{
 					for(var i=0;i<$(currElm).find(selectboxoptions_wrap + " li").length;i++)
 					{
-						$($(currElm).find(selectboxoptions_wrap + " li").get(i)).append("<input type=\"hidden\" id=\""+$(currElm).attr("id") +"_"+ i+"\" name=\""+$(currElm).attr("id") +"_"+ i+"\" value=\""+$(currElm).attr("id")+"\">");
+						var currInnerElm = $(currElm).find(selectboxoptions_wrap + " li").get(i);
 						
-						if($($(currElm).find(selectboxoptions_wrap + " li").get(i)).hasClass(classselected))
+						$(currInnerElm).append("<input type=\"text\" id=\""+$(currElm).attr("id") +"_"+ i+"\" name=\""+$(currElm).attr("id") +"_"+ i+"\" value=\"\">");
+						
+						if($(currInnerElm).hasClass(classselected))
 						{
-							var elmVal = $($(currElm).find(selectboxoptions_wrap + " li").get(i)).find(elmValue).text();
-							$($(currElm).find(selectboxoptions_wrap + " li").get(i)).find("input").val(elmVal);
+							var checkVal = $(currInnerElm).find("span").text();
+							$($(currElm).find(selectboxoptions_wrap + " li").get(i)).find("input").val(checkVal);
 						}
 					}
 				}
@@ -129,6 +133,7 @@
 		};
 		/** FUNCTIONS **/
 		
+		//CREATE CUSTOM SELECT BOX
 		for(var x=0;x<$(this).length;x++)
 		{
 			var currElm = $(this).get(x);
@@ -149,10 +154,9 @@
 			{
 				var checked="";
 				var currOption = $(select_options).get(i);
+				
 				if($(currOption).attr("selected"))
 					checked ="selected";
-				else
-					checked="";
 					
 				opts_str = opts_str + "<li class=\""+checked +"\"><span class=\"elmValue\">"+$(currOption).val()+"</span>"+$(currOption).text()+"</li>";
 			}
@@ -187,7 +191,8 @@
 			
 			var id;
 			var boxtype = $(this).parent().attr("class");
-			if(boxtype == "selectboxoptions_radio")
+			
+			if(boxtype.indexOf("selectboxoptions_radio") >-1)
 			{
 				if(!$(this).hasClass(classselected))
 				{
