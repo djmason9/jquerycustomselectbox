@@ -29,6 +29,7 @@
  * @param openspeed:		"normal",			//selectbox open speed "slow","normal","fast" or numbers 1000
  * @param isdisabled:		false,				//disables the selectbox
  * @param selectwidth:		"auto",				//set width of selectbox
+ * @param wrappername:		".select_wrap"		//class name of the wrapper tag
 */
 (function($) {
 
@@ -53,7 +54,8 @@
 				hoverstyle:		"hover",			//css hover style name
 				openspeed:		"normal",			//selectbox open speed "slow","normal","fast" or numbers 1000
 				alldisabled:	false,				//disables the selectbox
-				selectwidth:	"auto"				//set width of selectbox
+				selectwidth:	"auto",				//set width of selectbox
+				wrappername:	".select_wrap"
 			};
 		//override defaults
 		var opts = $.extend(defaults, options);
@@ -183,7 +185,7 @@
 			if(isDisabled){$.fn.disable($(selectboxoptions_wrap).get(x));}
 		}
 		
-		var thisElement = $(".select_wrap");
+		var thisElement = $(opts.wrappername);
 
 		//bind item clicks
 		$(selectboxoptions_wrap+ " ul li").unbind().click( function() {
