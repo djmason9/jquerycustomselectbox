@@ -78,7 +78,7 @@
 			for(var x=0;x<$(thisElm).length;x++)
 			{
 				var currElm = $(thisElm).get(x); 
-				var boxtype = $($(thisElement).get(x)).find(".selectboxoptions_wrap ul").attr("class");
+				var boxtype = $($(thisElement).get(x)).find(selectboxoptions_wrap+ " ul").attr("class");
 				if(boxtype == "selectboxoptions_radio")
 				{
 					$(currElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+$(currElm).attr("id")+"\" name=\""+$(currElm).attr("id")+"\" value=\"\">");
@@ -104,7 +104,7 @@
 		{
 			for(var i=0;i<$(selectbox).length;i++)
 			{
-				var boxtype = $($(selectbox).get(i)).parent().find(".selectboxoptions_wrap ul").attr("class");
+				var boxtype = $($(selectbox).get(i)).parent().find(selectboxoptions_wrap+ " ul").attr("class");
 				
 				if($($(selectbox).get(i)).parent().find("." +boxtype).find("li").hasClass(classselected))
 				{
@@ -117,20 +117,14 @@
 		
 		$.fn.scrolling = function (theElm, isOpen)
 		{
-			for(var x=0;x<$(theElm).length;x++)
+			if(isOpen)
 			{
-				var thisElem = $(theElm).get(x);
-				var boxtype = $(thisElem).parent().find(".selectboxoptions_wrap ul").attr("class");
-				
-				if(isOpen)
-				{
-					if($(thisElem).parent().find("." +boxtype).find("li").length >= opts.scrollminitems){
-						$(thisElem).parent().find("." +boxtype).css("height",opts.scrollheight).addClass("setScroll");
-					}
+				if($(theElm).parent().find(selectboxoptions_wrap+ " ul li").length >= opts.scrollminitems){
+					$(theElm).parent().find(selectboxoptions_wrap+ " ul").css("height",opts.scrollheight).addClass("setScroll");
 				}
-				else{
-					$(thisElem).parent().find("." +boxtype).css("height","auto").removeClass("setScroll");
-				}
+			}
+			else{
+				$(theElm).parent().find(selectboxoptions_wrap+ " ul").css("height","auto").removeClass("setScroll");
 			}
 		};
 		/** FUNCTIONS **/
@@ -163,10 +157,10 @@
 				opts_str = opts_str + "<li class=\""+checked +"\"><span class=\"elmValue\">"+$(currOption).val()+"</span>"+$(currOption).text()+"</li>";
 			}
 			
-			$(wrapperElm).find(".selectboxoptions_wrap").empty().html("<ul class=\""+boxtype+"\">"+opts_str+"</ul></div></div>");
+			$(wrapperElm).find(selectboxoptions_wrap).empty().html("<ul class=\""+boxtype+"\">"+opts_str+"</ul></div></div>");
 			
 			if(isDisabled) 
-				$.fn.disable($(".selectboxoptions_wrap").get(x));
+				$.fn.disable($(selectboxoptions_wrap).get(x));
 		}
 		
 		var thisElement = $(".select_wrap");
@@ -176,7 +170,7 @@
 		for(var x=0;x<$(thisElement).length;x++)
 		{
 			var currElm = $(thisElement).get(x);
-			var boxtype = $($(thisElement).get(x)).find(".selectboxoptions_wrap ul").attr("class");
+			var boxtype = $($(thisElement).get(x)).find(selectboxoptions_wrap+ " ul").attr("class");
 			if("auto" != opts.selectwidth)
 			{
 				$(currElm).find(selectbox + " ul").css({width:opts.selectwidth});
@@ -189,7 +183,7 @@
 			}
 		}
 		//bind item clicks
-		$(".selectboxoptions_wrap ul li").unbind().click( function() {
+		$(selectboxoptions_wrap+ " ul li").unbind().click( function() {
 			
 			var id;
 			var boxtype = $(this).parent().attr("class");
@@ -236,17 +230,17 @@
 				function() {
 					if(opts.isscrolling){$.fn.scrolling($(this),true);}
 					//unhide li
-					$(this).parent().find("li").removeClass(hideitem);
+					$(this).parent().find(selectboxoptions_wrap+ " ul li").removeClass(hideitem);
 					//makes the arrow go up or down
 					$(this).removeClass(classselectbox).addClass(classselectboxopen);
 					//slides the options down
 					$(this).parent().find(selectboxoptions_wrap).slideDown(opts.openspeed);
 				},
 				function() {
-					var boxtype = $(this).parent().find(".selectboxoptions_wrap ul").attr("class");
-					if($(this).parent().find("." +boxtype).find("li").hasClass(classselected))
+					var boxtype = $(this).parent().find(selectboxoptions_wrap+ " ul").attr("class");
+					if($(this).parent().find(selectboxoptions_wrap+ " ul li").hasClass(classselected))
 					{
-						$(this).parent().find("." +boxtype).find("li").addClass(hideitem);
+						$(this).parent().find(selectboxoptions_wrap+ " ul li").addClass(hideitem);
 					}	
 					else
 					{
@@ -255,6 +249,7 @@
 						//slides the options up
 						$(this).parent().find(selectboxoptions_wrap).slideUp("normal");
 					}
+					
 					if(opts.isscrolling){$.fn.scrolling($(this),false);}
 				});
 		
