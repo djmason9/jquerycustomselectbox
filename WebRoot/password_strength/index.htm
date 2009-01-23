@@ -16,9 +16,22 @@
 		<link rel="stylesheet" type="text/css" href="../generalstyle.css">
 		<script>
 			$(document).ready( function() {
+
+				//BASIC
 				$(".password_test").passStrength({
 					userid:	"#user_id"
-					})
+					});
+				
+				//ADVANCED
+				$(".password_adv").passStrength({
+					shortPass: 		"top_shortPass",
+					badPass:		"top_badPass",
+					goodPass:		"top_goodPass",
+					strongPass:		"top_strongPass",
+					baseStyle:		"top_testresult",
+					userid:			"#user_id_adv",
+					messageloc:		0
+				});
 			});
 		</script>
 	</head>
@@ -29,10 +42,26 @@
 		<div><a href="http://plugins.jquery.com/project/">Download Here</a></div>
 		<div><a href="#">Other Plugins</a></div>
 		</h2>
-		<label class="lbl_header">OPTIONS</label>
+			<label class="lbl_header">OPTIONS</label>
+	<div class="code">
+	<code>
+	<pre class="html">
+@param shortPass:	"shortPass",	//optional
+@param badPass:		"badPass",	//optional
+@param goodPass:	"goodPass",	//optional
+@param strongPass:	"strongPass",	//optional
+@param baseStyle:	"testresult",	//optional
+@param userid:		"",		//required override
+@param messageloc:	1		//before == 0 or after == 1
+	</pre>
+	</code>
+	</div>
+		<label class="lbl_header">BASIC USAGES</label>
 		<code>
 			<pre class="html">
-			
+$(".password_test").passStrength({
+	userid:	"#user_id"
+});
 			</pre>
 		</code>
 		<table cellpadding="2" cellspacing="0" border="0">
@@ -43,6 +72,30 @@
 			<tr>
 				<td align="right">Password:</td>
 				<td><input type="password" name="pass_word" class="password_test"/></td>
+			</tr>
+		</table>
+		<label class="lbl_header">ADVANCED USAGES</label>
+		<code>
+			<pre class="html">
+$(".password_adv").passStrength({
+	shortPass: 		"top_shortPass",	//optional
+	badPass:		"top_badPass",		//optional
+	goodPass:		"top_goodPass",		//optional
+	strongPass:		"top_strongPass",	//optional
+	baseStyle:		"top_testresult",	//optional
+	userid:			"user_id",		//required override
+	messageloc:		0			//before == 0 or after == 1
+});
+			</pre>
+		</code>
+		<table cellpadding="2" cellspacing="0" border="0">
+			<tr>
+				<td align="right">User Name:</td>
+				<td><input type="text" name="user_name" id="user_id_adv"/></td>
+			</tr>
+			<tr>
+				<td align="right">Password:</td>
+				<td><input type="password" name="pass_word" class="password_adv"/></td>
 			</tr>
 		</table>
 	</div>
