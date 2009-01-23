@@ -83,7 +83,7 @@
 				if(boxtype.indexOf("selectboxoptions_radio") >-1)
 				{
 					var radioVal = $(currElm).find("."+classselected+" span").text();
-					$(currElm).find(selectboxoptions_wrap).append("<input type=\"text\" id=\""+$(currElm).attr("id")+"\" name=\""+$(currElm).attr("id")+"\" value=\""+radioVal+"\">");
+					$(currElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+$(currElm).attr("id")+"\" name=\""+$(currElm).attr("id")+"\" value=\""+radioVal+"\">");
 				}
 				else
 				{
@@ -91,7 +91,7 @@
 					{
 						var currInnerElm = $(currElm).find(selectboxoptions_wrap + " li").get(i);
 						
-						$(currInnerElm).append("<input type=\"text\" id=\""+$(currElm).attr("id") +"_"+ i+"\" name=\""+$(currElm).attr("id") +"_"+ i+"\" value=\"\">");
+						$(currInnerElm).append("<input type=\"hidden\" id=\""+$(currElm).attr("id") +"_"+ i+"\" name=\""+$(currElm).attr("id") +"_"+ i+"\" value=\"\">");
 						
 						if($(currInnerElm).hasClass(classselected))
 						{
@@ -138,33 +138,36 @@
 		{
 			var currElm = $(this).get(x);
 			var wrapperElm = $(currElm).parent();
-			var name = $(currElm).parent().find("label").text();
+			var name = "";
 			var select_options = $(currElm).find("option");
 			var opts_str="";
 			var isDisabled = $(currElm).attr("disabled");
 			var isMulti = $(currElm).attr("multiple");
 			var boxtype = "selectboxoptions_radio";
+			var disabled = "";
 			
-			if(isMulti)
-				boxtype = "selectboxoptions_check";
-			
-			$(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\">");
-			
+			if(isMulti){boxtype = "selectboxoptions_check";}
+			if(isDisabled){disabled="disabled";}
 			for(var i=0;i<select_options.length;i++)
 			{
 				var checked="";
 				var currOption = $(select_options).get(i);
 				
-				if($(currOption).attr("selected"))
-					checked ="selected";
+				if(i===0){
+					name =$(currOption).text();
+				}
+				else
+				{
+					if($(currOption).attr("selected")){checked ="selected";}
 					
-				opts_str = opts_str + "<li class=\""+checked +"\"><span class=\"elmValue\">"+$(currOption).val()+"</span>"+$(currOption).text()+"</li>";
+					opts_str = opts_str + "<li class=\""+checked +" "+disabled+"\"><span class=\"elmValue\">"+$(currOption).val()+"</span>"+$(currOption).text()+"</li>";
+				}
 			}
 			
+			$(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\">");
 			$(wrapperElm).find(selectboxoptions_wrap).empty().html("<ul class=\""+boxtype+"\">"+opts_str+"</ul></div></div>");
 			
-			if(isDisabled) 
-				$.fn.disable($(selectboxoptions_wrap).get(x));
+			if(isDisabled){$.fn.disable($(selectboxoptions_wrap).get(x));}
 		}
 		
 		var thisElement = $(".select_wrap");
@@ -173,55 +176,59 @@
 		
 		for(var x=0;x<$(thisElement).length;x++)
 		{
-			var currElm = $(thisElement).get(x);
+			var currElmWiden = $(thisElement).get(x);
 			var boxtype = $($(thisElement).get(x)).find(selectboxoptions_wrap+ " ul").attr("class");
 			if("auto" != opts.selectwidth)
 			{
-				$(currElm).find(selectbox + " ul").css({width:opts.selectwidth});
-				$(currElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(opts.selectwidth+57) + "px"});
-				$(currElm).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
+				$(currElmWiden).find(selectbox + " ul").css({width:opts.selectwidth});
+				$(currElmWiden).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(opts.selectwidth+57) + "px"});
+				$(currElmWiden).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
 			}else
 			{
-				$(currElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:($(currElm).find(selectbox + " ul").width()+57) + "px"});
-				$(currElm).find(selectboxfoot + " div").css({width:$(currElm).find(selectbox + " ul").width() + "px"});
+				$(currElmWiden).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:($(currElmWiden).find(selectbox + " ul").width()+57) + "px"});
+				$(currElmWiden).find(selectboxfoot + " div").css({width:$(currElmWiden).find(selectbox + " ul").width() + "px"});
 			}
 		}
+		
 		//bind item clicks
 		$(selectboxoptions_wrap+ " ul li").unbind().click( function() {
 			
-			var id;
-			var boxtype = $(this).parent().attr("class");
-			
-			if(boxtype.indexOf("selectboxoptions_radio") >-1)
+			if($(this).attr("class").indexOf("disabled") < 0)
 			{
-				if(!$(this).hasClass(classselected))
+				var id;
+				var boxtype = $(this).parent().attr("class");
+				
+				if(boxtype.indexOf("selectboxoptions_radio") >-1)
 				{
-					id = $(this).find(elmValue).text();
-					$(this).parent().find("." + classselected).removeClass(classselected);
-					$(this).addClass(classselected);
-					$(this).parent().parent().find("input").val($(this).find(elmValue).text());
+					if(!$(this).hasClass(classselected))
+					{
+						id = $(this).find(elmValue).text();
+						$(this).parent().find("." + classselected).removeClass(classselected);
+						$(this).addClass(classselected);
+						$(this).parent().parent().find("input").val($(this).find(elmValue).text());
+					}
+					else
+					{
+						$(this).parent().find("." + classselected).removeClass(classselected);
+						$(this).parent().parent().find("input").val("");
+					}
 				}
-				else
+				else //checkbox
 				{
-					$(this).parent().find("." + classselected).removeClass(classselected);
-					$(this).parent().parent().find("input").val("");
-				}
-			}
-			else //checkbox
-			{
-				if($(this).hasClass(classselected))
-				{
-					//turn off the checkbox
-					$(this).removeClass(classselected);
-					//blank out the value
-					$(this).find("input").val("");
-				}
-				else
-				{
-					//gets the value of the element
-					id = $(this).find(elmValue).text();			
-					$(this).addClass(classselected);
-					$(this).find("input").val(id);
+					if($(this).hasClass(classselected))
+					{
+						//turn off the checkbox
+						$(this).removeClass(classselected);
+						//blank out the value
+						$(this).find("input").val("");
+					}
+					else
+					{
+						//gets the value of the element
+						id = $(this).find(elmValue).text();			
+						$(this).addClass(classselected);
+						$(this).find("input").val(id);
+					}
 				}
 			}
 		}).mouseover(function(){
