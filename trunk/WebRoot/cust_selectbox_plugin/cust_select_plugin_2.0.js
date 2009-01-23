@@ -169,27 +169,22 @@
 			$(wrapperElm).find(selectboxoptions_wrap).empty().html("<ul class=\""+boxtype+"\">"+opts_str+"</ul></div></div>");
 			$(wrapperElm).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
 			
+			if("auto" != opts.selectwidth)
+			{
+				$(wrapperElm).find(selectbox + " ul").css({width:opts.selectwidth});
+				$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(opts.selectwidth+57) + "px"});
+				$(wrapperElm).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
+			}else
+			{
+				$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:($(wrapperElm).find(selectbox + " ul").width()+57) + "px"});
+				$(wrapperElm).find(selectboxfoot + " div").css({width:$(wrapperElm).find(selectbox + " ul").width() + "px"});
+			}
+			
 			if(isDisabled){$.fn.disable($(selectboxoptions_wrap).get(x));}
 		}
 		
 		var thisElement = $(".select_wrap");
 
-		for(var x=0;x<$(thisElement).length;x++)
-		{
-			var currElmWiden = $(thisElement).get(x);
-			var boxtype = $($(thisElement).get(x)).find(selectboxoptions_wrap+ " ul").attr("class");
-			if("auto" != opts.selectwidth)
-			{
-				$(currElmWiden).find(selectbox + " ul").css({width:opts.selectwidth});
-				$(currElmWiden).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(opts.selectwidth+57) + "px"});
-				$(currElmWiden).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
-			}else
-			{
-				$(currElmWiden).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:($(currElmWiden).find(selectbox + " ul").width()+57) + "px"});
-				$(currElmWiden).find(selectboxfoot + " div").css({width:$(currElmWiden).find(selectbox + " ul").width() + "px"});
-			}
-		}
-		
 		//bind item clicks
 		$(selectboxoptions_wrap+ " ul li").unbind().click( function() {
 			
