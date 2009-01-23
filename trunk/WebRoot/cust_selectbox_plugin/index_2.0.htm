@@ -34,30 +34,66 @@
 	</h2>
 	<label class="lbl_header">HTML EXAMPLE</label>
 	<pre class="html">
-	
+&#60;div class="select_wrap"&#62;
+	&#60;select name="sample_select"&#62;
+		&#60;option&#62;Sample Selection&#60;/option&#62;
+		&#60;option value="1"&#62;Option One&#60;/option&#62;
+		&#60;option value="2"&#62;Option Two&#60;/option&#62;
+		&#60;option value="3"&#62;Option Three&#60;/option&#62;
+		&#60;option value="4"&#62;Option Four&#60;/option&#62;
+	&#60;/select&#62;
+&#60;/div&#62;	
 	</pre>
 	
 	<label class="lbl_header">BASIC USAGE</label>
 	<div class="code">
 	<code>
-	<pre>
-	</pre>
-	</code>
-	</div>
-	<p/>
-	
+<pre>
+<span class="html">Applies to all boxes</span>
+$(".select_wrap").custSelectBox();
+<span class="html">
+&#60;div class="select_wrap"&#62;
+	&#60;select name="sample_select"&#62;
+		&#60;option&#62;Sample Selection&#60;/option&#62;
+		&#60;option value="1"&#62;Option One&#60;/option&#62;
+		&#60;option value="2"&#62;Option Two&#60;/option&#62;
+		&#60;option value="3"&#62;Option Three&#60;/option&#62;
+		&#60;option value="4"&#62;Option Four&#60;/option&#62;
+	&#60;/select&#62;
+&#60;/div&#62;
+</span>	
+</pre>
+</code>
+</div>
 	<div class="select_wrap">
 	<select name="sample_select">
 		<option>Sample Selection Long Version</option>
 		<option value="1">Option One</option>
-		<option value="2">Option Two</option>
+		<option value="2" selected="selected">Option Two</option>
 		<option value="3">Option Three</option>
 		<option value="4">Option Four</option>
 	</select>
 	</div>
-	
+<label class="lbl_header">MULTI SELECT VERSION</label>
+<div class="code">
+	<code>
+<pre>
+<span class="html">
+&#60;div class="select_wrap"  multiple="multiple"&#62;
+	&#60;select name="sample_select"&#62;
+		&#60;option&#62;Sample Selection&#60;/option&#62;
+		&#60;option value="1"&#62;Option One&#60;/option&#62;
+		&#60;option value="2"&#62;Option Two&#60;/option&#62;
+		&#60;option value="3"&#62;Option Three&#60;/option&#62;
+		&#60;option value="4"&#62;Option Four&#60;/option&#62;
+	&#60;/select&#62;
+&#60;/div&#62;
+</span>	
+</pre>
+</code>
+</div>
 	<div class="select_wrap">
-	<select name="sample_select" multiple="multiple" id="custom_multi">
+	<select name="sample_select" multiple="multiple">
 		<option>Sample Selection</option>
 		<option value="1">Option One</option>
 		<option value="2" selected="selected">Option Two</option>
@@ -65,16 +101,33 @@
 		<option value="4">Option Four</option>
 	</select>
 	</div>
-	
+<label class="lbl_header">DISABLED VERSION</label>
+<div class="code">
+	<code>
+<pre>
+<span class="html">
+&#60;div class="select_wrap" disabled="disabled"&#62;
+	&#60;select name="sample_select"&#62;
+		&#60;option&#62;Sample Selection&#60;/option&#62;
+		&#60;option value="1"&#62;Option One&#60;/option&#62;
+		&#60;option value="2"&#62;Option Two&#60;/option&#62;
+		&#60;option value="3"&#62;Option Three&#60;/option&#62;
+		&#60;option value="4"&#62;Option Four&#60;/option&#62;
+	&#60;/select&#62;
+&#60;/div&#62;	
+</span>
+</pre>
+</code>
+</div>
 	<div class="select_wrap">
-	<select name="sample_select" multiple="multiple" disabled="disabled">
+	<select name="sample_select" disabled="disabled">
 		<option>Sample Selection</option>
 		<option value="1">Option One</option>
-		<option value="2">Option Two</option>
-		<option value="3" selected="selected">Option Three</option>
+		<option value="2" selected="selected">Option Two</option>
+		<option value="3">Option Three</option>
+		<option value="4">Option Four</option>
 	</select>
-	</div>
-	
+	</div>	
 	
 	</div>
 	</body>
