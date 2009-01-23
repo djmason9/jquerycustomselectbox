@@ -45,7 +45,7 @@
 		var elmValue = ".elmValue";
 		
 		var defaults = {
-				isscrolling: 	false,				//scrolls long lists
+				isscrolling: 	true,				//scrolls long lists
 				scrollminitems:	15,					//items before scrolling
 				scrollheight:	150,				//height of scrolling window
 				preopenselect:	true,				//opens prechecked select boxes
@@ -117,16 +117,20 @@
 		
 		$.fn.scrolling = function (theElm, isOpen)
 		{
-			var boxtype = $(theElm).parent().find(".selectboxoptions_wrap ul").attr("class");
-			
-			if(isOpen)
+			for(var x=0;x<$(theElm).length;x++)
 			{
-				if($(theElm).parent().find("." +boxtype).find("li").length >= opts.scrollminitems){
-					$(theElm).parent().find("." +boxtype).css("height",opts.scrollheight).addClass("setScroll");
+				var thisElem = $(theElm).get(x);
+				var boxtype = $(thisElem).parent().find(".selectboxoptions_wrap ul").attr("class");
+				
+				if(isOpen)
+				{
+					if($(thisElem).parent().find("." +boxtype).find("li").length >= opts.scrollminitems){
+						$(thisElem).parent().find("." +boxtype).css("height",opts.scrollheight).addClass("setScroll");
+					}
 				}
-			}
-			else{
-				$(theElm).parent().find("." +boxtype).css("height","auto").removeClass("setScroll");
+				else{
+					$(thisElem).parent().find("." +boxtype).css("height","auto").removeClass("setScroll");
+				}
 			}
 		};
 		/** FUNCTIONS **/

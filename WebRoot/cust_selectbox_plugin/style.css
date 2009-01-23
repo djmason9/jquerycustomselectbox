@@ -83,7 +83,7 @@
 }
 .selectboxoptions_radio li.selected_disable{
 	background:#f2f2f2 url(images/selectradio_disable.png) no-repeat 5px 6px;
-	display:block ;
+	display:block !important;
 }
 .selectboxoptions_check li.selected{
 	background:#f2f2f2 url(images/selectcheck.png) no-repeat 5px 6px;
@@ -91,7 +91,7 @@
 }
 .selectboxoptions_check li.selected_disable{
 	background:#f2f2f2 url(images/selectcheck_disable.png) no-repeat 5px 6px;
-	display:block ;
+	display:block !important;
 }
 .selectboxoptions_radio li.hover,.selectboxoptions_check li.hover{
 	background-color:#f2f2f2;
