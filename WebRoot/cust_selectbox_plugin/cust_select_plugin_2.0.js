@@ -14,9 +14,10 @@
 
  * View the GNU General Public License <http://www.gnu.org/licenses/>.
 
- * @author Darren Mason
- * @projectDescription	Replaces the standard HTML form selectbox with a custom looking selectbox. Allows for disable, multiselect, scrolling, and very customizable.
- * @version 2.0.0
+ * @author Darren Mason (djmason9@gmail.com)
+ * @date 1/22/2009
+ * @projectDescription Replaces the standard HTML form selectbox with a custom looking selectbox. Allows for disable, multiselect, scrolling, and very customizable.
+ * @version 1.5.0
  * 
  * @requires jquery.js (tested with 1.3.1)
  * 
@@ -133,7 +134,7 @@
 		};
 		/** FUNCTIONS **/
 		
-		//CREATE CUSTOM SELECT BOX
+		//BUILD HTML TO CREATE CUSTOM SELECT BOX
 		for(var x=0;x<$(this).length;x++)
 		{
 			var currElm = $(this).get(x);
@@ -159,21 +160,20 @@
 				else
 				{
 					if($(currOption).attr("selected")){checked ="selected";}
-					
+
 					opts_str = opts_str + "<li class=\""+checked +" "+disabled+"\"><span class=\"elmValue\">"+$(currOption).val()+"</span>"+$(currOption).text()+"</li>";
 				}
 			}
 			
 			$(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\">");
 			$(wrapperElm).find(selectboxoptions_wrap).empty().html("<ul class=\""+boxtype+"\">"+opts_str+"</ul></div></div>");
+			$(wrapperElm).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
 			
 			if(isDisabled){$.fn.disable($(selectboxoptions_wrap).get(x));}
 		}
 		
 		var thisElement = $(".select_wrap");
 
-		$(thisElement).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
-		
 		for(var x=0;x<$(thisElement).length;x++)
 		{
 			var currElmWiden = $(thisElement).get(x);
