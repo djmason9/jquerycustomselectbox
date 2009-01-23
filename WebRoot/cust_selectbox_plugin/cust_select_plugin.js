@@ -27,7 +27,7 @@
  * @param preopenselect:	true,				//opens prechecked select boxes
  * @param hoverstyle:		"hover",			//css hover style name
  * @param openspeed:		"normal",			//selectbox open speed "slow","normal","fast" or numbers 1000
- * @param isdisabled:		false,				//disables the selectbox
+ * @param alldisabled:		false,				//disables all the selectbox
  * @param selectwidth:		"auto",				//set width of selectbox
  * @param wrappername:		".select_wrap"		//class name of the wrapper tag
 */
