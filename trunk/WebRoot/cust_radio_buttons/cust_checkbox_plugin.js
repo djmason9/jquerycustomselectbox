@@ -17,7 +17,7 @@
  * @author Darren Mason (djmason9@gmail.com)
  * @date 1/22/2009
  * @projectDescription	Replaces the standard HTML form checkbox or radio buttons. Allows for disable, and very customizable.
- * @version 1.0.1
+ * @version 1.0.2
  * 
  * @requires jquery.js (tested with 1.3.1)
  * 
@@ -35,42 +35,40 @@
 		//override defaults
 		var opts = $.extend(defaults, options);
 		
+		return this.each(function() { 
+	 		 var obj = $(this);
+	 		 
 		$.fn.buildbox = function(thisElm){
 
-			for(var x=0;x<$(thisElm).length;x++)
+			var currElm = $(thisElm);
+			
+			$(currElm).css({display:"none"}).before("<span class=\"cust_checkbox\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+			
+			var isChecked = $(currElm).attr("checked");
+			var boxtype = $(currElm).attr("type");
+			var disabled = $(currElm).attr("disabled");
+			
+			if(boxtype === "checkbox")
 			{
-				var currElm = $(thisElm).get(x);
-				
-				$(currElm).css({display:"none"}).before("<span class=\"cust_checkbox\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
-				
-				var isChecked = $(currElm).attr("checked");
-				var boxtype = $(currElm).attr("type");
-				var disabled = $(currElm).attr("disabled");
-				
-				if(boxtype === "checkbox")
-				{
-					$(currElm).prev("span").addClass("checkbox");
-					if(disabled || opts.disable_all)
-						boxtype = "checkbox_disabled";
-				}
-				else
-				{
-					$(currElm).prev("span").addClass("radio");
-					if(disabled || opts.disable_all)
-						boxtype = "radio_disabled";
-				}
-				
-				if(isChecked)
-					$(currElm).prev("span").addClass("cust_"+boxtype+"_on");
-				else
-					$(currElm).prev("span").addClass("cust_"+boxtype+"_off");
-				
-				if(opts.disable_all)
-					$(currElm).attr("disabled","disabled");
+				$(currElm).prev("span").addClass("checkbox");
+				if(disabled || opts.disable_all){boxtype = "checkbox_disabled";}
 			}
+			else
+			{
+				$(currElm).prev("span").addClass("radio");
+				if(disabled || opts.disable_all){boxtype = "radio_disabled";}
+			}
+			
+			if(isChecked)
+				$(currElm).prev("span").addClass("cust_"+boxtype+"_on");
+			else
+				$(currElm).prev("span").addClass("cust_"+boxtype+"_off");
+			
+			if(opts.disable_all)
+				$(currElm).attr("disabled","disabled");
 		};
 		
-		$.fn.buildbox($(this));
+		$.fn.buildbox($(obj));
 		
 		$("."+ opts.wrapperclass+" label").unbind().click(function(){
 			
@@ -116,9 +114,8 @@
 					$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").next("input").attr("checked","checked"); //turn on
 				}
 			}
-			
 		});
-		
-	};
+	}); 	
+};
 	
 })(jQuery);
