@@ -17,7 +17,7 @@
  * @author Darren Mason (djmason9@gmail.com)
  * @date 1/22/2009
  * @projectDescription Replaces the standard HTML form selectbox with a custom looking selectbox. Allows for disable, multiselect, scrolling, and very customizable.
- * @version 2.1.0
+ * @version 2.0.0
  * 
  * @requires jquery.js (tested with 1.3.1)
  * 
@@ -60,11 +60,10 @@
 		//override defaults
 		var opts = $.extend(defaults, options);
 
-		return this.each(function() { 
 		
 		/** FUNCTIONS **/
 		$.fn.disable = function(thisElm){
-			//loop through items
+
 			for(var i=0;i<$(thisElm).find("ul").find("li").length;i++)
 			{
 				if($($(thisElm).find("ul").find("li").get(i)).hasClass(classselected))
@@ -79,8 +78,10 @@
 		//adds form elements to the selectbox
 		$.fn.addformelms = function(thisElm){
 			
-				var currElm = $(thisElm) ;
-				var boxtype = $(thisElement).find(selectboxoptions_wrap+ " ul").attr("class");
+			for(var x=0;x<$(thisElm).length;x++)
+			{
+				var currElm = $(thisElm).get(x); 
+				var boxtype = $($(thisElement).get(x)).find(selectboxoptions_wrap+ " ul").attr("class");
 				
 				if(boxtype.indexOf("selectboxoptions_radio") >-1)
 				{
@@ -102,19 +103,23 @@
 						}
 					}
 				}
+			}
 		};
 		
 		//opens selectboxs if they have pre selected options
 		$.fn.openSelectBoxsThatArePrePopulated = function()
 		{
-				var boxtype = $(selectbox).parent().find(selectboxoptions_wrap+ " ul").attr("class");
+			for(var i=0;i<$(selectbox).length;i++)
+			{
+				var boxtype = $($(selectbox).get(i)).parent().find(selectboxoptions_wrap+ " ul").attr("class");
 				
-				if($(selectbox).parent().find("." +boxtype).find("li").hasClass(classselected))
+				if($($(selectbox).get(i)).parent().find("." +boxtype).find("li").hasClass(classselected))
 				{
-					$(selectbox).addClass(classselectboxopen);
-					$(selectbox).parent().find(selectboxoptions_wrap).slideDown("normal");
-					$(selectbox).parent().find("." +boxtype).find("li").addClass(hideitem);
+					$($(selectbox).get(i)).addClass(classselectboxopen);
+					$($(selectbox).get(i)).parent().find(selectboxoptions_wrap).slideDown("normal");
+					$($(selectbox).get(i)).parent().find("." +boxtype).find("li").addClass(hideitem);
 				}
+			}
 		};
 		
 		$.fn.scrolling = function (theElm, isOpen)
@@ -132,51 +137,53 @@
 		/** FUNCTIONS **/
 		
 		//BUILD HTML TO CREATE CUSTOM SELECT BOX
-		var main_currElm = $(this);
-		var wrapperElm = $(main_currElm).parent();
-		var name = "";
-		var select_options = $(main_currElm).find("option");
-		var opts_str="";
-		var isDisabled = $(main_currElm).attr("disabled");
-		var isMulti = $(main_currElm).attr("multiple");
-		var boxtype = "selectboxoptions_radio";
-		var disabled = "";
-		
-		if(isMulti){boxtype = "selectboxoptions_check";}
-		if(isDisabled){disabled="disabled";}
-		//loop through options
-		for(var i=0;i<select_options.length;i++)
+		for(var x=0;x<$(this).length;x++)
 		{
-			var checked="";
-			var currOption = $(select_options).get(i);
+			var currElm = $(this).get(x);
+			var wrapperElm = $(currElm).parent();
+			var name = "";
+			var select_options = $(currElm).find("option");
+			var opts_str="";
+			var isDisabled = $(currElm).attr("disabled");
+			var isMulti = $(currElm).attr("multiple");
+			var boxtype = "selectboxoptions_radio";
+			var disabled = "";
 			
-			if(i===0){
-				name =$(currOption).text();
-			}
-			else
+			if(isMulti){boxtype = "selectboxoptions_check";}
+			if(isDisabled){disabled="disabled";}
+			for(var i=0;i<select_options.length;i++)
 			{
-				if($(currOption).attr("selected")){checked ="selected";}
+				var checked="";
+				var currOption = $(select_options).get(i);
+				
+				if(i===0){
+					name =$(currOption).text();
+				}
+				else
+				{
+					if($(currOption).attr("selected")){checked ="selected";}
 
-				opts_str = opts_str + "<li class=\""+checked +" "+disabled+"\"><span class=\"elmValue\">"+$(currOption).val()+"</span>"+$(currOption).text()+"</li>";
+					opts_str = opts_str + "<li class=\""+checked +" "+disabled+"\"><span class=\"elmValue\">"+$(currOption).val()+"</span>"+$(currOption).text()+"</li>";
+				}
 			}
+			
+			$(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\">");
+			$(wrapperElm).find(selectboxoptions_wrap).empty().html("<ul class=\""+boxtype+"\">"+opts_str+"</ul></div></div>");
+			$(wrapperElm).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
+			
+			if("auto" != opts.selectwidth)
+			{
+				$(wrapperElm).find(selectbox + " ul").css({width:opts.selectwidth});
+				$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(opts.selectwidth+57) + "px"});
+				$(wrapperElm).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
+			}else
+			{
+				$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:($(wrapperElm).find(selectbox + " ul").width()+57) + "px"});
+				$(wrapperElm).find(selectboxfoot + " div").css({width:$(wrapperElm).find(selectbox + " ul").width() + "px"});
+			}
+			
+			if(isDisabled){$.fn.disable($(selectboxoptions_wrap).get(x));}
 		}
-		
-		$(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\">");
-		$(wrapperElm).find(selectboxoptions_wrap).empty().html("<ul class=\""+boxtype+"\">"+opts_str+"</ul></div></div>");
-		$(wrapperElm).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
-		
-		if("auto" != opts.selectwidth)
-		{
-			$(wrapperElm).find(selectbox + " ul").css({width:opts.selectwidth});
-			$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(opts.selectwidth+57) + "px"});
-			$(wrapperElm).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
-		}else
-		{
-			$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:($(wrapperElm).find(selectbox + " ul").width()+57) + "px"});
-			$(wrapperElm).find(selectboxfoot + " div").css({width:$(wrapperElm).find(selectbox + " ul").width() + "px"});
-		}
-		
-		if(isDisabled){$.fn.disable($(wrapperElm).find(selectboxoptions_wrap));}
 		
 		var thisElement = $(opts.wrappername);
 
@@ -229,37 +236,36 @@
 
 		//bind sliding open
 		$(thisElement).find(selectbox).unbind().toggle(
-			function() {
-				if(opts.isscrolling){$.fn.scrolling($(this),true);}
-				//unhide li
-				$(this).parent().find(selectboxoptions_wrap+ " ul li").removeClass(hideitem);
-				//makes the arrow go up or down
-				$(this).removeClass(classselectbox).addClass(classselectboxopen);
-				//slides the options down
-				$(this).parent().find(selectboxoptions_wrap).slideDown(opts.openspeed);
-			},
-			function() {
-				var boxtype = $(this).parent().find(selectboxoptions_wrap+ " ul").attr("class");
-				if($(this).parent().find(selectboxoptions_wrap+ " ul li").hasClass(classselected))
-				{
-					$(this).parent().find(selectboxoptions_wrap+ " ul li").addClass(hideitem);
-				}	
-				else
-				{
-					//makes the arrows go up or down
-					$(this).removeClass(classselectboxopen).addClass(classselectbox);
-					//slides the options up
-					$(this).parent().find(selectboxoptions_wrap).slideUp("normal");
-				}
-				
-				if(opts.isscrolling){$.fn.scrolling($(this),false);}
-			});
+				function() {
+					if(opts.isscrolling){$.fn.scrolling($(this),true);}
+					//unhide li
+					$(this).parent().find(selectboxoptions_wrap+ " ul li").removeClass(hideitem);
+					//makes the arrow go up or down
+					$(this).removeClass(classselectbox).addClass(classselectboxopen);
+					//slides the options down
+					$(this).parent().find(selectboxoptions_wrap).slideDown(opts.openspeed);
+				},
+				function() {
+					var boxtype = $(this).parent().find(selectboxoptions_wrap+ " ul").attr("class");
+					if($(this).parent().find(selectboxoptions_wrap+ " ul li").hasClass(classselected))
+					{
+						$(this).parent().find(selectboxoptions_wrap+ " ul li").addClass(hideitem);
+					}	
+					else
+					{
+						//makes the arrows go up or down
+						$(this).removeClass(classselectboxopen).addClass(classselectbox);
+						//slides the options up
+						$(this).parent().find(selectboxoptions_wrap).slideUp("normal");
+					}
+					
+					if(opts.isscrolling){$.fn.scrolling($(this),false);}
+				});
 		
 			
 			$.fn.addformelms($(thisElement));
 			if(opts.preopenselect){ $.fn.openSelectBoxsThatArePrePopulated();}
 			if(opts.alldisabled){$.fn.disable($(thisElement));}
-		});
 		
 	};
 	
