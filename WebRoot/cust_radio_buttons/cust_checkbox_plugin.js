@@ -15,9 +15,9 @@
  * View the GNU General Public License <http://www.gnu.org/licenses/>.
 
  * @author Darren Mason (djmason9@gmail.com)
- * @date 1/22/2009
+ * @date 3/13/2009
  * @projectDescription	Replaces the standard HTML form checkbox or radio buttons. Allows for disable, and very customizable.
- * @version 1.0.2
+ * @version 1.0.3
  * 
  * @requires jquery.js (tested with 1.3.2)
  * 
