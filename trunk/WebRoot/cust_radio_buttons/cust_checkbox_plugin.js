@@ -19,7 +19,7 @@
  * @projectDescription	Replaces the standard HTML form checkbox or radio buttons. Allows for disable, and very customizable.
  * @version 1.0.2
  * 
- * @requires jquery.js (tested with 1.3.1)
+ * @requires jquery.js (tested with 1.3.2)
  * 
  * @param disable_all:	false,
  * @param wrapperclass:	"group"
