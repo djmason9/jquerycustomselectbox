@@ -15,9 +15,9 @@
  * View the GNU General Public License <http://www.gnu.org/licenses/>.
 
  * @author Darren Mason (djmason9@gmail.com)
- * @date 1/22/2009
+ * @date 3/13/2009
  * @projectDescription Replaces the standard HTML form selectbox with a custom looking selectbox. Allows for disable, multiselect, scrolling, and very customizable.
- * @version 2.1.0
+ * @version 2.1.1
  * 
  * @requires jquery.js (tested with 1.3.1)
  * 
@@ -161,8 +161,7 @@
 			}
 		}
 		
-		$(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\">");
-		$(wrapperElm).find(selectboxoptions_wrap).empty().html("<ul class=\""+boxtype+"\">"+opts_str+"</ul></div></div>");
+		$(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\"><ul class=\""+boxtype+"\">"+opts_str+"</ul></div>");
 		$(wrapperElm).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
 		
 		if("auto" != opts.selectwidth)
@@ -221,9 +220,9 @@
 					}
 				}
 			}
-		}).mouseover(function(){
+		}).hover(function(){
 			$(this).addClass(opts.hoverstyle);
-		}).mouseout(function(){
+		},function(){
 			$(this).removeClass(opts.hoverstyle);
 		});
 
