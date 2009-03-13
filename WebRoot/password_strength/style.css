@@ -67,12 +67,18 @@ input{
 	font-size:13px;
 	font-family: arial,helvetica,san-serif;
 	color:#666;
-	padding:10px 0px 12px 10px;
-	margin:0 10px 0 10px;
+	padding:0px 0px 12px 10px;
+	margin-left:10px;
+	display: block;
+	height:28px;
+	float:left;
 }
 .testresult span{
 	padding:10px 20px 12px 10px;
-	margin: 10px 0px 10px 20px;
+	margin: 0px 0px 0px 20px;
+	display:block;
+	float:right;
+	white-space: nowrap;
 }
 .shortPass{
 	background:url(images/red.png) no-repeat 0 0;
