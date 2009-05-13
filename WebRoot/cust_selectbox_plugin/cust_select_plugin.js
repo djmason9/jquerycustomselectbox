@@ -15,9 +15,9 @@
  * View the GNU General Public License <http://www.gnu.org/licenses/>.
 
  * @author Darren Mason (djmason9@gmail.com)
- * @date 3/13/2009
+ * @date 5/13/2009
  * @projectDescription Replaces the standard HTML form selectbox with a custom looking selectbox. Allows for disable, multiselect, scrolling, and very customizable.
- * @version 2.1.1
+ * @version 2.1.2
  * 
  * @requires jquery.js (tested with 1.3.1)
  * 
@@ -78,22 +78,20 @@
 	
 		//adds form elements to the selectbox
 		$.fn.addformelms = function(thisElm){
-			
-				var currElm = $(thisElm) ;
-				var boxtype = $(thisElement).find(selectboxoptions_wrap+ " ul").attr("class");
+				var currElm = $(thisElm);
+				var boxtype = $(thisElm).find(selectboxoptions_wrap+ " ul").attr("class");
 				
 				if(boxtype.indexOf("selectboxoptions_radio") >-1)
 				{
 					var radioVal = $(currElm).find("."+classselected+" span").text();
-					$(currElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+$(currElm).attr("id")+"\" name=\""+$(currElm).attr("id")+"\" value=\""+radioVal+"\">");
+					$(currElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+$(main_currElm).attr("id")+"\" name=\""+$(main_currElm).attr("name")+"\" value=\""+radioVal+"\">");
 				}
 				else
 				{
 					for(var i=0;i<$(currElm).find(selectboxoptions_wrap + " li").length;i++)
 					{
 						var currInnerElm = $(currElm).find(selectboxoptions_wrap + " li").get(i);
-						
-						$(currInnerElm).append("<input type=\"hidden\" id=\""+$(currElm).attr("id") +"_"+ i+"\" name=\""+$(currElm).attr("id") +"_"+ i+"\" value=\"\">");
+						$(currInnerElm).append("<input type=\"hidden\" id=\""+$(main_currElm).attr("id") +"_"+ i+"\" name=\""+$(main_currElm).attr("name") +"_"+ i+"\" value=\"\">");
 						
 						if($(currInnerElm).hasClass(classselected))
 						{
@@ -164,17 +162,15 @@
 		$(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\"><ul class=\""+boxtype+"\">"+opts_str+"</ul></div>");
 		$(wrapperElm).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
 		
-		if("auto" != opts.selectwidth)
-		{
+		if("auto" != opts.selectwidth){
 			$(wrapperElm).find(selectbox + " ul").css({width:opts.selectwidth});
 			$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(opts.selectwidth+57) + "px"});
 			$(wrapperElm).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
-		}else
-		{
+		}else{
 			$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:($(wrapperElm).find(selectbox + " ul").width()+57) + "px"});
 			$(wrapperElm).find(selectboxfoot + " div").css({width:$(wrapperElm).find(selectbox + " ul").width() + "px"});
 		}
-		
+
 		if(isDisabled){$.fn.disable($(wrapperElm).find(selectboxoptions_wrap));}
 		
 		var thisElement = $(opts.wrappername);
@@ -214,7 +210,7 @@
 					else
 					{
 						//gets the value of the element
-						id = $(this).find(elmValue).text();			
+						id = $(this).find(elmValue).text();	
 						$(this).addClass(classselected);
 						$(this).find("input").val(id);
 					}
@@ -255,7 +251,7 @@
 			});
 		
 			
-			$.fn.addformelms($(thisElement));
+			$.fn.addformelms($(wrapperElm));
 			if(opts.preopenselect){ $.fn.openSelectBoxsThatArePrePopulated();}
 			if(opts.alldisabled){$.fn.disable($(thisElement));}
 		});
