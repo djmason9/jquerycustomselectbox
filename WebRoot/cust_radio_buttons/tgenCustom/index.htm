@@ -17,7 +17,7 @@ $(document).ready( function() {
 		
 		for(i=0;i<$("input[type='radio'],input[type='checkbox']").length;i++)
 		{
-			console.log($($("input[type='radio'],input[type='checkbox']").get(i)).val());
+			console.log($($("input[type='radio'],input[type='checkbox']").get(i)).attr("name") +"-" +$($("input[type='radio'],input[type='checkbox']").get(i)).val());
 		}
 	});
 	
@@ -65,9 +65,9 @@ $("input[type='checkbox']").custCheckBox();
 </div>
 	<fieldset class="group">
 	<legend>Check Box Items:</legend>
-		<label for="1x">Label One:</label> <input type="checkbox" value="1x" name="checkboxone" id="1x" checked="checked"/>
-		<label for="2x">Label Two:</label> <input type="checkbox" value="2x" name="checkboxone" id="2x"/>
-		<label for="3x">Label Three:</label> <input type="checkbox" value="3x" name="checkboxone" id="3x" checked="checked"/>
+		<label for="1x">Label One 1x:</label> <input type="checkbox" value="1x" name="checkboxone" id="1x" checked="checked"/>
+		<label for="2x">Label Two 2x:</label> <input type="checkbox" value="2x" name="checkboxone" id="2x"/>
+		<label for="3x">Label Three 3x:</label> <input type="checkbox" value="3x" name="checkboxone" id="3x" checked="checked"/>
 	</fieldset>
 	<p/>
 <div class="code">
@@ -88,7 +88,7 @@ $("input[type='radio']").custCheckBox();
 	<fieldset class="group">
 	<legend>Radio Button Items:</legend>
 		<label for="7x">Label One 7x:</label> <input type="radio" value="7x" name="radiooneset2" id="7x"/>
-		<label for="8x">Label Two 8x:</label> <input type="radio" value="8x" name="radiooneset2" id="8x" checked="checked"/>
+		<label for="8x">Label Two 8x:</label> <input type="radio" value="8x" name="radiooneset2" id="8x"/>
 		<label for="9x">Label Three 9x:</label> <input type="radio" value="9x" name="radiooneset2" id="9x"/>
 		<label for="9x">Label Four 10x:</label> <input type="radio" value="10x" name="radiooneset2" id="10x"/>
 	</fieldset>

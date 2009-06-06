@@ -36,6 +36,7 @@
 		var opts = $.extend(defaults, options);
 		var tmpElmName="";
 		var tmpArrayElms=[];
+		var DEFAULTVALUE="";
 		
 		return this.each(function() { 
 	 		 var obj = $(this);
@@ -49,7 +50,7 @@
 			var disabled = $(currElm).attr("disabled");
 			var elmName = $(currElm).attr("name");
 			
-			$(currElm).css({display:"inline"}).before("<span boxVal=\""+$(currElm).val()+"\" class=\"cust_checkbox\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+			$(currElm).css({display:"none"}).before("<span boxVal=\""+$(currElm).val()+"\" class=\"cust_checkbox\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
 			
 			//add class to determine type
 			if(boxtype === "checkbox")
@@ -72,7 +73,7 @@
 			else
 			{
 				$(currElm).prev("span").addClass("cust_"+boxtype+"_off");
-				$(currElm).val("");
+				$(currElm).val(DEFAULTVALUE);
 				
 				//only checkboxes can all be checked
 				if(boxtype === "checkbox")
@@ -161,12 +162,13 @@
 					if($(this).hasClass("cust_"+boxtype+"_off") && !disabled)
 						$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").next("input").val($(this).attr("boxval")); //turn on
 					else if(!disabled)
-						$(this).removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").val(""); //turn off
+						$(this).removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").val(DEFAULTVALUE); //turn off
 				}
 				else if(!disabled)//radio
 				{
-					$(this).parent().find(".cust_checkbox").removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").val("");
+					$(this).parent().find(".cust_checkbox").removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").val(DEFAULTVALUE);
 					$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").next("input").val($(this).attr("boxval")); //turn on
+					$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").next("input").attr("checked","checked"); //turn on
 				}
 			}
 		});
