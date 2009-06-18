@@ -17,9 +17,9 @@
  * @author Darren Mason (djmason9@gmail.com)
  * @date 5/13/2009
  * @projectDescription Replaces the standard HTML form selectbox with a custom looking selectbox. Allows for disable, multiselect, scrolling, and very customizable.
- * @version 2.1.2
+ * @version 2.1.3
  * 
- * @requires jquery.js (tested with 1.3.1)
+ * @requires jquery.js (tested with 1.3.2)
  * 
  * @param isscrolling: 		false,				//scrolls long lists
  * @param scrollminitems:	15,					//items before scrolling
@@ -103,9 +103,9 @@
 		};
 		
 		//opens selectboxs if they have pre selected options
-		$.fn.openSelectBoxsThatArePrePopulated = function()
+		$.fn.openSelectBoxsThatArePrePopulated = function(currElm)
 		{
-				var boxtype = $(selectbox).parent().find(selectboxoptions_wrap+ " ul").attr("class");
+				var boxtype = $(currElm).find(selectboxoptions_wrap+ " ul").attr("class");
 				
 				if($(selectbox).parent().find("." +boxtype).find("li").hasClass(classselected))
 				{
@@ -252,7 +252,7 @@
 		
 			
 			$.fn.addformelms($(wrapperElm));
-			if(opts.preopenselect){ $.fn.openSelectBoxsThatArePrePopulated();}
+			if(opts.preopenselect){ $.fn.openSelectBoxsThatArePrePopulated($(wrapperElm));}
 			if(opts.alldisabled){$.fn.disable($(thisElement));}
 		});
 		
