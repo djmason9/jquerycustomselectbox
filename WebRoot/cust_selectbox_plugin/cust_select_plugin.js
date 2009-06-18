@@ -17,7 +17,7 @@
  * @author Darren Mason (djmason9@gmail.com)
  * @date 5/13/2009
  * @projectDescription Replaces the standard HTML form selectbox with a custom looking selectbox. Allows for disable, multiselect, scrolling, and very customizable.
- * @version 2.1.3
+ * @version 2.1.4
  * 
  * @requires jquery.js (tested with 1.3.2)
  * 
