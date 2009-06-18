@@ -31,9 +31,9 @@
  * @param selectwidth:		"auto",				//set width of selectbox
  * @param wrappername:		".select_wrap"		//class name of the wrapper tag
 */
-(function($) {
+(function(jQuery) {
 
-	$.fn.custSelectBox = function(options){
+	jQuery.fn.custSelectBox = function(options){
 		
 		//css names
 		var classselectbox = "selectbox";
@@ -58,85 +58,85 @@
 				wrappername:	".select_wrap"
 			};
 		//override defaults
-		var opts = $.extend(defaults, options);
+		var opts = jQuery.extend(defaults, options);
 
 		return this.each(function() { 
 		
 		/** FUNCTIONS **/
-		$.fn.disable = function(thisElm){
+		jQuery.fn.disable = function(thisElm){
 			//loop through items
-			for(var i=0;i<$(thisElm).find("ul").find("li").length;i++)
+			for(var i=0;i<jQuery(thisElm).find("ul").find("li").length;i++)
 			{
-				if($($(thisElm).find("ul").find("li").get(i)).hasClass(classselected))
+				if(jQuery(jQuery(thisElm).find("ul").find("li").get(i)).hasClass(classselected))
 				{
-					$($(thisElm).find("ul").find("li").get(i)).addClass("selected_disable");
+					jQuery(jQuery(thisElm).find("ul").find("li").get(i)).addClass("selected_disable");
 				}
-				$($(thisElm).find("ul").find("li").get(i)).unbind();
-				$($(thisElm).find("ul").get(i)).find("input").attr("disabled","disabled");
+				jQuery(jQuery(thisElm).find("ul").find("li").get(i)).unbind();
+				jQuery(jQuery(thisElm).find("ul").get(i)).find("input").attr("disabled","disabled");
 			}				
 		};
 	
 		//adds form elements to the selectbox
-		$.fn.addformelms = function(thisElm){
-				var currElm = $(thisElm);
-				var boxtype = $(thisElm).find(selectboxoptions_wrap+ " ul").attr("class");
+		jQuery.fn.addformelms = function(thisElm){
+				var currElm = jQuery(thisElm);
+				var boxtype = jQuery(thisElm).find(selectboxoptions_wrap+ " ul").attr("class");
 				
 				if(boxtype.indexOf("selectboxoptions_radio") >-1)
 				{
-					var radioVal = $(currElm).find("."+classselected+" span").text();
-					$(currElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+$(main_currElm).attr("id")+"\" name=\""+$(main_currElm).attr("name")+"\" value=\""+radioVal+"\">");
+					var radioVal = jQuery(currElm).find("."+classselected+" span").text();
+					jQuery(currElm).find(selectboxoptions_wrap).append("<input type=\"hidden\" id=\""+jQuery(main_currElm).attr("id")+"\" name=\""+jQuery(main_currElm).attr("name")+"\" value=\""+radioVal+"\">");
 				}
 				else
 				{
-					for(var i=0;i<$(currElm).find(selectboxoptions_wrap + " li").length;i++)
+					for(var i=0;i<jQuery(currElm).find(selectboxoptions_wrap + " li").length;i++)
 					{
-						var currInnerElm = $(currElm).find(selectboxoptions_wrap + " li").get(i);
-						$(currInnerElm).append("<input type=\"hidden\" id=\""+$(main_currElm).attr("id") +"_"+ i+"\" name=\""+$(main_currElm).attr("name") +"_"+ i+"\" value=\"\">");
+						var currInnerElm = jQuery(currElm).find(selectboxoptions_wrap + " li").get(i);
+						jQuery(currInnerElm).append("<input type=\"hidden\" id=\""+jQuery(main_currElm).attr("id") +"_"+ i+"\" name=\""+jQuery(main_currElm).attr("name") +"_"+ i+"\" value=\"\">");
 						
-						if($(currInnerElm).hasClass(classselected))
+						if(jQuery(currInnerElm).hasClass(classselected))
 						{
-							var checkVal = $(currInnerElm).find("span").text();
-							$($(currElm).find(selectboxoptions_wrap + " li").get(i)).find("input").val(checkVal);
+							var checkVal = jQuery(currInnerElm).find("span").text();
+							jQuery(jQuery(currElm).find(selectboxoptions_wrap + " li").get(i)).find("input").val(checkVal);
 						}
 					}
 				}
 		};
 		
 		//opens selectboxs if they have pre selected options
-		$.fn.openSelectBoxsThatArePrePopulated = function(currElm)
+		jQuery.fn.openSelectBoxsThatArePrePopulated = function(currElm)
 		{
-				var boxtype = $(currElm).find(selectboxoptions_wrap+ " ul").attr("class");
+				var boxtype = jQuery(currElm).find(selectboxoptions_wrap+ " ul").attr("class");
 				
-				if($(selectbox).parent().find("." +boxtype).find("li").hasClass(classselected))
+				if(jQuery(selectbox).parent().find("." +boxtype).find("li").hasClass(classselected))
 				{
-					$(selectbox).addClass(classselectboxopen);
-					$(selectbox).parent().find(selectboxoptions_wrap).slideDown("normal");
-					$(selectbox).parent().find("." +boxtype).find("li").addClass(hideitem);
+					jQuery(selectbox).addClass(classselectboxopen);
+					jQuery(selectbox).parent().find(selectboxoptions_wrap).slideDown("normal");
+					jQuery(selectbox).parent().find("." +boxtype).find("li").addClass(hideitem);
 				}
 		};
 		
-		$.fn.scrolling = function (theElm, isOpen)
+		jQuery.fn.scrolling = function (theElm, isOpen)
 		{
 			if(isOpen)
 			{
-				if($(theElm).parent().find(selectboxoptions_wrap+ " ul li").length >= opts.scrollminitems){
-					$(theElm).parent().find(selectboxoptions_wrap+ " ul").css("height",opts.scrollheight).addClass("setScroll");
+				if(jQuery(theElm).parent().find(selectboxoptions_wrap+ " ul li").length >= opts.scrollminitems){
+					jQuery(theElm).parent().find(selectboxoptions_wrap+ " ul").css("height",opts.scrollheight).addClass("setScroll");
 				}
 			}
 			else{
-				$(theElm).parent().find(selectboxoptions_wrap+ " ul").css("height","auto").removeClass("setScroll");
+				jQuery(theElm).parent().find(selectboxoptions_wrap+ " ul").css("height","auto").removeClass("setScroll");
 			}
 		};
 		/** FUNCTIONS **/
 		
 		//BUILD HTML TO CREATE CUSTOM SELECT BOX
-		var main_currElm = $(this);
-		var wrapperElm = $(main_currElm).parent();
+		var main_currElm = jQuery(this);
+		var wrapperElm = jQuery(main_currElm).parent();
 		var name = "";
-		var select_options = $(main_currElm).find("option");
+		var select_options = jQuery(main_currElm).find("option");
 		var opts_str="";
-		var isDisabled = $(main_currElm).attr("disabled");
-		var isMulti = $(main_currElm).attr("multiple");
+		var isDisabled = jQuery(main_currElm).attr("disabled");
+		var isMulti = jQuery(main_currElm).attr("multiple");
 		var boxtype = "selectboxoptions_radio";
 		var disabled = "";
 		
@@ -146,114 +146,114 @@
 		for(var i=0;i<select_options.length;i++)
 		{
 			var checked="";
-			var currOption = $(select_options).get(i);
+			var currOption = jQuery(select_options).get(i);
 			
 			if(i===0){
-				name =$(currOption).text();
+				name =jQuery(currOption).text();
 			}
 			else
 			{
-				if($(currOption).attr("selected")){checked ="selected";}
+				if(jQuery(currOption).attr("selected")){checked ="selected";}
 
-				opts_str = opts_str + "<li class=\""+checked +" "+disabled+"\"><span class=\"elmValue\">"+$(currOption).val()+"</span>"+$(currOption).text()+"</li>";
+				opts_str = opts_str + "<li class=\""+checked +" "+disabled+"\"><span class=\"elmValue\">"+jQuery(currOption).val()+"</span>"+jQuery(currOption).text()+"</li>";
 			}
 		}
 		
-		$(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\"><ul class=\""+boxtype+"\">"+opts_str+"</ul></div>");
-		$(wrapperElm).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
+		jQuery(wrapperElm).empty().html("<div class=\"selectbox\"><ul><li>"+name+"</li></ul></div><div class=\"selectboxoptions_wrap\"><ul class=\""+boxtype+"\">"+opts_str+"</ul></div>");
+		jQuery(wrapperElm).find(selectboxoptions_wrap +" ul").after("<div class=\""+classselectboxfoot+"\"><div></div></div>"); //add footer
 		
 		if("auto" != opts.selectwidth){
-			$(wrapperElm).find(selectbox + " ul").css({width:opts.selectwidth});
-			$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(opts.selectwidth+57) + "px"});
-			$(wrapperElm).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
+			jQuery(wrapperElm).find(selectbox + " ul").css({width:opts.selectwidth});
+			jQuery(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(opts.selectwidth+57) + "px"});
+			jQuery(wrapperElm).find(selectboxfoot + " div").css({width:opts.selectwidth + "px"});
 		}else{
-			$(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:($(wrapperElm).find(selectbox + " ul").width()+57) + "px"});
-			$(wrapperElm).find(selectboxfoot + " div").css({width:$(wrapperElm).find(selectbox + " ul").width() + "px"});
+			jQuery(wrapperElm).find(selectboxoptions_wrap + " ul").attr("class",boxtype).css({width:(jQuery(wrapperElm).find(selectbox + " ul").width()+57) + "px"});
+			jQuery(wrapperElm).find(selectboxfoot + " div").css({width:jQuery(wrapperElm).find(selectbox + " ul").width() + "px"});
 		}
 
-		if(isDisabled){$.fn.disable($(wrapperElm).find(selectboxoptions_wrap));}
+		if(isDisabled){jQuery.fn.disable(jQuery(wrapperElm).find(selectboxoptions_wrap));}
 		
-		var thisElement = $(opts.wrappername);
+		var thisElement = jQuery(opts.wrappername);
 
 		//bind item clicks
-		$(selectboxoptions_wrap+ " ul li").unbind().click( function() {
+		jQuery(selectboxoptions_wrap+ " ul li").unbind().click( function() {
 			
-			if($(this).attr("class").indexOf("disabled") < 0)
+			if(jQuery(this).attr("class").indexOf("disabled") < 0)
 			{
 				var id;
-				var boxtype = $(this).parent().attr("class");
+				var boxtype = jQuery(this).parent().attr("class");
 				
 				if(boxtype.indexOf("selectboxoptions_radio") >-1)
 				{
-					if(!$(this).hasClass(classselected))
+					if(!jQuery(this).hasClass(classselected))
 					{
-						id = $(this).find(elmValue).text();
-						$(this).parent().find("." + classselected).removeClass(classselected);
-						$(this).addClass(classselected);
-						$(this).parent().parent().find("input").val($(this).find(elmValue).text());
+						id = jQuery(this).find(elmValue).text();
+						jQuery(this).parent().find("." + classselected).removeClass(classselected);
+						jQuery(this).addClass(classselected);
+						jQuery(this).parent().parent().find("input").val(jQuery(this).find(elmValue).text());
 					}
 					else
 					{
-						$(this).parent().find("." + classselected).removeClass(classselected);
-						$(this).parent().parent().find("input").val("");
+						jQuery(this).parent().find("." + classselected).removeClass(classselected);
+						jQuery(this).parent().parent().find("input").val("");
 					}
 				}
 				else //checkbox
 				{
-					if($(this).hasClass(classselected))
+					if(jQuery(this).hasClass(classselected))
 					{
 						//turn off the checkbox
-						$(this).removeClass(classselected);
+						jQuery(this).removeClass(classselected);
 						//blank out the value
-						$(this).find("input").val("");
+						jQuery(this).find("input").val("");
 					}
 					else
 					{
 						//gets the value of the element
-						id = $(this).find(elmValue).text();	
-						$(this).addClass(classselected);
-						$(this).find("input").val(id);
+						id = jQuery(this).find(elmValue).text();	
+						jQuery(this).addClass(classselected);
+						jQuery(this).find("input").val(id);
 					}
 				}
 			}
 		}).hover(function(){
-			$(this).addClass(opts.hoverstyle);
+			jQuery(this).addClass(opts.hoverstyle);
 		},function(){
-			$(this).removeClass(opts.hoverstyle);
+			jQuery(this).removeClass(opts.hoverstyle);
 		});
 
 		//bind sliding open
-		$(thisElement).find(selectbox).unbind().toggle(
+		jQuery(thisElement).find(selectbox).unbind().toggle(
 			function() {
-				if(opts.isscrolling){$.fn.scrolling($(this),true);}
+				if(opts.isscrolling){jQuery.fn.scrolling(jQuery(this),true);}
 				//unhide li
-				$(this).parent().find(selectboxoptions_wrap+ " ul li").removeClass(hideitem);
+				jQuery(this).parent().find(selectboxoptions_wrap+ " ul li").removeClass(hideitem);
 				//makes the arrow go up or down
-				$(this).removeClass(classselectbox).addClass(classselectboxopen);
+				jQuery(this).removeClass(classselectbox).addClass(classselectboxopen);
 				//slides the options down
-				$(this).parent().find(selectboxoptions_wrap).slideDown(opts.openspeed);
+				jQuery(this).parent().find(selectboxoptions_wrap).slideDown(opts.openspeed);
 			},
 			function() {
-				var boxtype = $(this).parent().find(selectboxoptions_wrap+ " ul").attr("class");
-				if($(this).parent().find(selectboxoptions_wrap+ " ul li").hasClass(classselected))
+				var boxtype = jQuery(this).parent().find(selectboxoptions_wrap+ " ul").attr("class");
+				if(jQuery(this).parent().find(selectboxoptions_wrap+ " ul li").hasClass(classselected))
 				{
-					$(this).parent().find(selectboxoptions_wrap+ " ul li").addClass(hideitem);
+					jQuery(this).parent().find(selectboxoptions_wrap+ " ul li").addClass(hideitem);
 				}	
 				else
 				{
 					//makes the arrows go up or down
-					$(this).removeClass(classselectboxopen).addClass(classselectbox);
+					jQuery(this).removeClass(classselectboxopen).addClass(classselectbox);
 					//slides the options up
-					$(this).parent().find(selectboxoptions_wrap).slideUp("normal");
+					jQuery(this).parent().find(selectboxoptions_wrap).slideUp("normal");
 				}
 				
-				if(opts.isscrolling){$.fn.scrolling($(this),false);}
+				if(opts.isscrolling){jQuery.fn.scrolling(jQuery(this),false);}
 			});
 		
 			
-			$.fn.addformelms($(wrapperElm));
-			if(opts.preopenselect){ $.fn.openSelectBoxsThatArePrePopulated($(wrapperElm));}
-			if(opts.alldisabled){$.fn.disable($(thisElement));}
+			jQuery.fn.addformelms(jQuery(wrapperElm));
+			if(opts.preopenselect){ jQuery.fn.openSelectBoxsThatArePrePopulated(jQuery(wrapperElm));}
+			if(opts.alldisabled){jQuery.fn.disable(jQuery(thisElement));}
 		});
 		
 	};
