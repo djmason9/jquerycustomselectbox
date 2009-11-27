@@ -17,7 +17,7 @@
  * @author Darren Mason (djmason9@gmail.com)
  * @date 7/3/2009
  * @projectDescription	Replaces the standard HTML form checkbox or radio buttons. Allows for disable, and very customizable.
- * @version 1.0.5
+ * @version 1.0.6
  * 
  * @requires jquery.js (tested with 1.3.2)
  * 
@@ -83,10 +83,15 @@
 					if($(custbox).hasClass("checkbox"))
 					{
 						if($(custbox).hasClass("cust_"+boxtype+"_off") && !disabled)
+						{
 							$(custbox).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").next("input").attr("checked","checked"); //turn on
+						}
 						
-						else if(!disabled)					
+						else if(!disabled)		
+						{
 							$(custbox).removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").removeAttr("checked"); //turn off
+							$(custbox).removeClass("cust_"+boxtype+"_hvr");
+						}
 						
 						
 					}
@@ -94,6 +99,7 @@
 					{
 						$(custbox).parent().find(".cust_checkbox").removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").removeAttr("checked");
 						$(custbox).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").next("input").attr("checked","checked"); //turn on
+						$(custbox).removeClass("cust_"+boxtype+"_hvr");
 					}
 					
 					opts.callback.call(this);					 
@@ -129,7 +135,10 @@
 						if($(this).hasClass("cust_"+boxtype+"_off") && !disabled)
 							$(this).removeClass("cust_"+boxtype+"_off").addClass("cust_"+boxtype+"_on").next("input").attr("checked","checked"); //turn on
 						else if(!disabled)
+						{
 							$(this).removeClass("cust_"+boxtype+"_on").addClass("cust_"+boxtype+"_off").next("input").removeAttr("checked"); //turn off
+							$(this).removeClass("cust_"+boxtype+"_hvr");
+						}
 					}
 					else if(!disabled)
 					{
