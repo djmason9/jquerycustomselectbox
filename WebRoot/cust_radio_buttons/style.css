@@ -5,8 +5,14 @@
 .cust_checkbox_on{
 	background:url(images/checkbox_on.png) no-repeat 0 0;
 }
+.cust_checkbox_hvr{
+	background:url(images/checkbox_hvr.png) no-repeat 0 0 !important;
+}
 .cust_radio_on{
 	background:url(images/radiobox_on.png) no-repeat 0 0;
+}
+.cust_radio_hvr{
+	background:url(images/radiobox_hvr.png) no-repeat 0 0  !important;
 }
 .cust_checkbox_off{
 	background:url(images/checkbox_off.png) no-repeat 0 0;

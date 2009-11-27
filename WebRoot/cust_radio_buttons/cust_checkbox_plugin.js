@@ -17,11 +17,12 @@
  * @author Darren Mason (djmason9@gmail.com)
  * @date 7/3/2009
  * @projectDescription	Replaces the standard HTML form checkbox or radio buttons. Allows for disable, and very customizable.
- * @version 1.0.4
+ * @version 1.0.5
  * 
  * @requires jquery.js (tested with 1.3.2)
  * 
  * @param disable_all:	false,
+ * @param hover:	true,
  * @param wrapperclass:	"group"
  * @param callback:	function(){ * your code here * }
  */
@@ -31,8 +32,9 @@
 		
 		var defaults = {
 				disable_all:	false,				//disables all the elements
+				hover:	true,						//adds a hover state to the tag
 				wrapperclass:	"group",			//the class name of the wrapper tag
-				callback:	function(){}			//a click event callback
+				callback:	function(){}			//a click event call back
 			};
 		//override defaults
 		var opts = $.extend(defaults, options);
@@ -98,6 +100,20 @@
 					
 				}
 						
+			}).hover(function(){
+				var custbox = $(this).next("span");
+				if($(custbox).hasClass("cust_checkbox_on") && opts.hover)
+					$(custbox).addClass("cust_checkbox_hvr");
+				else if($(custbox).hasClass("cust_radio_on") && opts.hover)
+					$(custbox).addClass("cust_radio_hvr");
+				
+			},function(){
+				var custbox = $(this).next("span");
+				if($(custbox).hasClass("cust_checkbox_on") && opts.hover)
+					$(custbox).removeClass("cust_checkbox_hvr");
+				else if($(custbox).hasClass("cust_radio_on") && opts.hover)
+					$(custbox).removeClass("cust_radio_hvr");
+				
 			});
 		
 			//attach a click event for each checkbox.
@@ -124,6 +140,16 @@
 					opts.callback.call(this);
 
 				}
+			}).hover(function(){
+				if($(this).hasClass("cust_checkbox_on") && opts.hover)
+					$(this).addClass("cust_checkbox_hvr");
+				else if($(this).hasClass("cust_radio_on") && opts.hover)
+					$(this).addClass("cust_radio_hvr");
+			},function(){
+				if($(this).hasClass("cust_checkbox_on") && opts.hover)
+					$(this).removeClass("cust_checkbox_hvr");
+				else if($(this).hasClass("cust_radio_on") && opts.hover)
+					$(this).removeClass("cust_radio_hvr");
 			});			
 			
 		};
